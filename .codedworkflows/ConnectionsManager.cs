@@ -1,0 +1,12 @@
+using UiPath.CodedWorkflows;
+using System;
+
+namespace UM_Auth_PatientExtraction
+{
+    public class ConnectionsManager
+    {
+        public ConnectionsManager(ICodedWorkflowsServiceContainer resolver)
+        {
+        }
+    }
+}

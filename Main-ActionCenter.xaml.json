@@ -1,0 +1,69 @@
+{
+  "DisplayName": "Main-ActionCenter",
+  "Tooltip": null,
+  "HelpLink": null,
+  "Color": null,
+  "OriginalIconFileName": null,
+  "Arguments": [
+    {
+      "Name": "str_Config_Path",
+      "DisplayName": "str_Config_Path",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": null,
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "IfUseQueue",
+      "DisplayName": "IfUseQueue",
+      "Category": null,
+      "Tooltip": "Variable that checks if the Document Understanding Process is using Orchestrator Queues or not.",
+      "Placeholder": "True",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "FilePath",
+      "DisplayName": "FilePath",
+      "Category": null,
+      "Tooltip": "Full file path to be processed. If IfUseQueue is True - then this one will be overwritten with queue item value",
+      "Placeholder": "C:\\Users\\vlri58189v\\Downloads\\01FA6642.pdf",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "IfSkipHumanValidationAlways",
+      "DisplayName": "IfSkipHumanValidationAlways",
+      "Category": null,
+      "Tooltip": "If True then always skip Action Center part. Useful for testing",
+      "Placeholder": "True",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "MasterLogFilePath",
+      "DisplayName": "MasterLogFilePath",
+      "Category": null,
+      "Tooltip": "CSV file with history of all extractions",
+      "Placeholder": null,
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    }
+  ]
+}

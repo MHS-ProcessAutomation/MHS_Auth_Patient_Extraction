@@ -1,0 +1,49 @@
+{
+
+  "FileDetails": {
+    "LocalPath": "C:\\Users\\vlri58189v\\Downloads\\MRMC-UHC-PATEL-AUTH-01F95104.PDF",
+    "FullName": "MRMC-UHC-PATEL-AUTH-01F95104",
+    "Extension": ".PDF"
+  },
+  "Data": {
+    "General": [
+      {
+        "Vendor": {
+          "Value": "vnedd",
+          "Confidence": 0.9961273,
+          "OcrConfidence": 0.98999995,
+          "IsExtracted": true
+        },
+        "Facility": {
+          "Value": "facil",
+          "Confidence": 0.70634323,
+          "OcrConfidence": 0.98999995,
+          "IsExtracted": true
+        },
+        "Document Type": {
+          "Value": "Approval",
+          "Confidence": 0.80075854,
+          "OcrConfidence": 0.98999995,
+          "IsExtracted": true
+        }
+      }
+    ],
+    "Patient Data": [
+      {
+        "Patient Name": {
+          "Value": "joh do",
+          "Confidence": 0.99955493,
+          "OcrConfidence": 0.98999995,
+          "IsExtracted": true
+        },
+
+        "Member ID": {
+          "Value": "454666",
+          "Confidence": 0.9999315,
+          "OcrConfidence": 0.98999995,
+          "IsExtracted": true
+        }
+      }
+    ]
+  }
+}
