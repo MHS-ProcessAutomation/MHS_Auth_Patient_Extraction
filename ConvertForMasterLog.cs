@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Linq;
 
-namespace UM_DelegationPerformer
+namespace UM_Auth_PatientExtraction
 {
     public class ConvertForMasterLog
     {

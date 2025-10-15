@@ -118,7 +118,7 @@
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="CheckExtractionResults" sap:VirtualizedContainerService.HintSize="980,1047" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="CheckExtractionResults" sap:VirtualizedContainerService.HintSize="1540,969" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="njl:JObject" Name="jsonObjectExtractionResults" />
       <Variable x:TypeArguments="x:Boolean" Name="blnHasLowConfidence" />
@@ -135,13 +135,31 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:Comment sap:VirtualizedContainerService.HintSize="468,145" sap2010:WorkflowViewState.IdRef="Comment_1" Text="!!! If any of the mandatory fields (Vendor, Facility, or Doc Type) are identified as Out Of Scope, the robot will throw an exception and skip HITL, even if the confidence is low" />
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Check Results for Out Of Scope - Invoke Workflow File (Check Results for Out Of Scope.xaml)" sap:VirtualizedContainerService.HintSize="468,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Util\CheckResultsForOutOfScope.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_strJsonExtractionResults">[in_strJsonData]</InArgument>
-        <OutArgument x:TypeArguments="njl:JObject" x:Key="out_jsonObjectExtractionResults">[jsonObjectExtractionResults]</OutArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-    </ui:InvokeWorkflowFile>
+    <ui:CommentOut sap2010:Annotation.AnnotationText="Check Out of Scope payor - TBD if required" DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="452,338" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,228" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Check Results for Out Of Scope - Invoke Workflow File (Check Results for Out Of Scope.xaml)" sap:VirtualizedContainerService.HintSize="382,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Util\CheckResultsForOutOfScope.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_strJsonExtractionResults">[in_strJsonData]</InArgument>
+              <OutArgument x:TypeArguments="njl:JObject" x:Key="out_jsonObjectExtractionResults">[jsonObjectExtractionResults]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
     <Sequence DisplayName="Low confidence (HITL)" sap:VirtualizedContainerService.HintSize="468,597" sap2010:WorkflowViewState.IdRef="Sequence_6">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">

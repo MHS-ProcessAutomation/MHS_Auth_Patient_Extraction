@@ -18,10 +18,9 @@ using UiPath.Testing.Enums;
 using UiPath.UIAutomationNext.API.Contracts;
 using UiPath.UIAutomationNext.API.Models;
 using UiPath.UIAutomationNext.Enums;
-using UM_DelegationPerformer.ObjectRepository;
 using Newtonsoft.Json.Linq;
 
-namespace UM_DelegationPerformer
+namespace UM_Auth_PatientExtraction
 {
     public class ConvertJsonToDict
     {

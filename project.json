@@ -1,5 +1,5 @@
 {
-  "name": "UM_Auth_Patient Extraction",
+  "name": "UM_Auth_PatientExtraction",
   "projectId": "38d1c848-70fb-40af-b88b-ad7232746fa5",
   "description": "",
   "main": "Main-ActionCenter.xaml",
@@ -169,7 +169,7 @@
     },
     {
       "filePath": "Test.cs",
-      "uniqueId": "49644f2e-63ad-4dcc-8f90-62ff7d2c4ce4",
+      "uniqueId": "ae608344-6725-4db2-9447-c082c3ff57ac",
       "input": [],
       "output": []
     }
