@@ -2,8 +2,6 @@
   <x:Members>
     <x:Property Name="in_strJsonFormattedExtractionResults" Type="InArgument(x:String)" />
     <x:Property Name="in_strFilePath" Type="InArgument(x:String)" />
-    <x:Property Name="in_strQueryPath" Type="InArgument(x:String)" />
-    <x:Property Name="in_blnIfRunClarity" Type="InArgument(x:Boolean)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="io_dictDocData" Type="InOutArgument(scg:Dictionary(x:String, x:String))" />
   </x:Members>
@@ -108,7 +106,7 @@
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="1540,1459" sap2010:WorkflowViewState.IdRef="Sequence_10">
+  <Sequence sap:VirtualizedContainerService.HintSize="1540,895" sap2010:WorkflowViewState.IdRef="Sequence_10">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strNextProcessQueuePath" />
       <Variable x:TypeArguments="x:String" Name="strNextProcessQueueName" />
@@ -119,7 +117,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Happy Path" sap:VirtualizedContainerService.HintSize="513,1436" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence DisplayName="Happy Path" sap:VirtualizedContainerService.HintSize="513,872" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:Boolean" Name="blnIfEnoughPatientDataForQuery" />
         <Variable x:TypeArguments="x:String" Name="strNumberMHD" />
@@ -132,13 +130,13 @@
       </sap:WorkflowViewStateService.ViewState>
       <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="479,57" sap2010:WorkflowViewState.IdRef="CommentOut_1">
         <ui:CommentOut.Body>
-          <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,163" sap2010:WorkflowViewState.IdRef="Sequence_14">
+          <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="Sequence_14">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ReadTextFile File="{x:Null}" Content="[in_strJsonFormattedExtractionResults]" DisplayName="Read Text File" FileName="C:\Users\vlri58189v\Documents\UiPath\UM Delegation Performer\test\FormattedExtractionResults\strJsonFormattedExtractionResults_20250923124231.json" sap:VirtualizedContainerService.HintSize="382,103" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+            <ui:ReadTextFile File="{x:Null}" Content="[in_strJsonFormattedExtractionResults]" DisplayName="Read Text File" FileName="C:\Users\vlri58189v\Documents\UiPath\UM Delegation Performer\test\FormattedExtractionResults\strJsonFormattedExtractionResults_20250923124231.json" sap:VirtualizedContainerService.HintSize="382,115" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
           </Sequence>
         </ui:CommentOut.Body>
         <sap:WorkflowViewStateService.ViewState>
@@ -188,34 +186,6 @@
           <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_dictDocData">[io_dictDocData]</InOutArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <ui:CommentOut sap2010:Annotation.AnnotationText="Clarity query not needed" DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="479,88" sap2010:WorkflowViewState.IdRef="CommentOut_2">
-        <ui:CommentOut.Body>
-          <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,228" sap2010:WorkflowViewState.IdRef="Sequence_17">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Clarity - General - Invoke Workflow File (Clarity - General.xaml)" sap:VirtualizedContainerService.HintSize="382,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="Clarity\Clarity - General.xaml">
-              <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="x:String" x:Key="in_strQueryPath">[in_strQueryPath]</InArgument>
-                <InArgument x:TypeArguments="x:Boolean" x:Key="in_blnIfRunClarity">[in_blnIfRunClarity]</InArgument>
-                <OutArgument x:TypeArguments="x:String" x:Key="out_strNumberMHD">[strNumberMHD]</OutArgument>
-                <OutArgument x:TypeArguments="x:String" x:Key="out_strPatientLastName">[strPatientLastName]</OutArgument>
-                <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_dictDocData">[io_dictDocData]</InOutArgument>
-                <InArgument x:TypeArguments="x:Int32" x:Key="in_intQueryTimeout">[CInt(in_Config("QueryTimeout"))]</InArgument>
-              </ui:InvokeWorkflowFile.Arguments>
-            </ui:InvokeWorkflowFile>
-          </Sequence>
-        </ui:CommentOut.Body>
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </ui:CommentOut>
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Move To Output Folder - Invoke Workflow File (Move To Output Folder.xaml)" sap:VirtualizedContainerService.HintSize="479,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="Util\MoveToOutputFolder.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <InArgument x:TypeArguments="x:String" x:Key="in_strGeneralFolderPath">[strGeneralFolderPath]</InArgument>
@@ -223,39 +193,13 @@
           <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <If sap2010:Annotation.AnnotationText="Only Approvals (=Authorizations) are processed by next process" Condition="[io_dictDocData(&quot;Document Type&quot;).ToUpper.Equals(&quot;APPROVAL&quot;)]" DisplayName="If Approval create q item for next process" sap:VirtualizedContainerService.HintSize="479,644" sap2010:WorkflowViewState.IdRef="If_1">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-        <If.Then>
-          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,228" sap2010:WorkflowViewState.IdRef="Sequence_15">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="CreateQueueItem - Invoke Workflow File (CreateQueueItem.xaml)" sap:VirtualizedContainerService.HintSize="382,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="Util\CreateQueueItem.xaml">
-              <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="x:String" x:Key="in_strQueueName">[strNextProcessQueueName]</InArgument>
-                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_dictDocData">[io_dictDocData]</InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="in_strQueueFolderPath">[strNextProcessQueuePath]</InArgument>
-              </ui:InvokeWorkflowFile.Arguments>
-            </ui:InvokeWorkflowFile>
-          </Sequence>
-        </If.Then>
-        <If.Else>
-          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,224" sap2010:WorkflowViewState.IdRef="Sequence_16">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,164" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;Not creating a queue item as it is not an Approval doc&quot;]" />
-          </Sequence>
-        </If.Else>
-      </If>
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="CreateQueueItem - Invoke Workflow File (CreateQueueItem.xaml)" sap:VirtualizedContainerService.HintSize="479,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="Util\CreateQueueItem.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="in_strQueueName">[strNextProcessQueueName]</InArgument>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_dictDocData">[io_dictDocData]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="in_strQueueFolderPath">[strNextProcessQueuePath]</InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
     </Sequence>
   </Sequence>
 </Activity>

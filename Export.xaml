@@ -126,7 +126,7 @@
       <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Store extraction results in a single location so they can be easily analyzed. While writing to CSV is not the most ideal solution, it is acceptable for the initial phase. The main objective is to support testing of new models and to track changes in their performance" DisplayName="Export" sap:VirtualizedContainerService.HintSize="898.6666666666666,3867.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Store extraction results in a single location so they can be easily analyzed. While writing to CSV is not the most ideal solution, it is acceptable for the initial phase. The main objective is to support testing of new models and to track changes in their performance" DisplayName="Export" sap:VirtualizedContainerService.HintSize="1540,3693" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dtToWrite" />
       <Variable x:TypeArguments="x:String" Name="strRowToAppend" />
@@ -137,12 +137,12 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="580.6666666666666,137.33333333333334" sap2010:WorkflowViewState.IdRef="CommentOut_6">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="581,57" sap2010:WorkflowViewState.IdRef="CommentOut_6">
       <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,25.333333333333332" sap2010:WorkflowViewState.IdRef="Sequence_22">
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="552,816" sap2010:WorkflowViewState.IdRef="Sequence_22">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
@@ -191,12 +191,12 @@
       </ui:CommentOut.Body>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <Sequence DisplayName="Get dt" sap:VirtualizedContainerService.HintSize="580.6666666666666,348" sap2010:WorkflowViewState.IdRef="Sequence_17">
+    <Sequence DisplayName="Get dt" sap:VirtualizedContainerService.HintSize="581,311" sap2010:WorkflowViewState.IdRef="Sequence_17">
       <Sequence.Variables>
         <Variable x:TypeArguments="sd:DataTable" Name="dtOnlyDocValues" />
       </Sequence.Variables>
@@ -205,20 +205,15 @@
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Assign sap2010:Annotation.AnnotationText="create datatble from values extracted from the doc" sap:VirtualizedContainerService.HintSize="434,148" sap2010:WorkflowViewState.IdRef="Assign_5">
+      <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_11">
         <Assign.To>
           <OutArgument x:TypeArguments="sd:DataTable">[dtOnlyDocValues]</OutArgument>
         </Assign.To>
         <Assign.Value>
-          <InArgument x:TypeArguments="sd:DataTable">[UM_DelegationPerformer.ConvertForMasterLog.ConvertJsonToDataTable(in_strJsonFromattedResults)]</InArgument>
+          <InArgument x:TypeArguments="sd:DataTable">[UM_Auth_PatientExtraction.ConvertForMasterLog.ConvertJsonToDataTable(in_strJsonFromattedResults)]</InArgument>
         </Assign.Value>
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
       </Assign>
-      <Assign sap:VirtualizedContainerService.HintSize="434,108" sap2010:WorkflowViewState.IdRef="Assign_6">
+      <Assign sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_6">
         <Assign.To>
           <OutArgument x:TypeArguments="sd:DataTable">[dtToWrite]</OutArgument>
         </Assign.To>
@@ -227,13 +222,13 @@
         </Assign.Value>
       </Assign>
     </Sequence>
-    <Sequence DisplayName="Add values" sap:VirtualizedContainerService.HintSize="580.6666666666666,1452.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_23">
+    <Sequence DisplayName="Add values" sap:VirtualizedContainerService.HintSize="581,1435" sap2010:WorkflowViewState.IdRef="Sequence_23">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence DisplayName="Add columns" sap:VirtualizedContainerService.HintSize="546.6666666666666,1360.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_4">
+      <Sequence DisplayName="Add columns" sap:VirtualizedContainerService.HintSize="547,1343" sap2010:WorkflowViewState.IdRef="Sequence_4">
         <Sequence.Variables>
           <Variable x:TypeArguments="s:String[]" Name="arrColumnsToAdd" />
         </Sequence.Variables>
@@ -243,7 +238,7 @@
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <Assign DisplayName="Assign Get columns that are not yet in DataTable" sap:VirtualizedContainerService.HintSize="512.6666666666666,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_10">
+        <Assign DisplayName="Assign Get columns that are not yet in DataTable" sap:VirtualizedContainerService.HintSize="513,114" sap2010:WorkflowViewState.IdRef="Assign_10">
           <Assign.To>
             <OutArgument x:TypeArguments="s:String[]">[arrColumnsToAdd]</OutArgument>
           </Assign.To>
@@ -251,13 +246,13 @@
             <InArgument x:TypeArguments="s:String[]">[in_arrMasterLogColumnsNames.Except(dtToWrite.Columns.Cast(Of DataColumn)().Select(Function(c) c.ColumnName)).ToArray()]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="reverse because each coumn will be set as the first one and this keeps the order from Config" DisplayName="For Each currentColumName" sap:VirtualizedContainerService.HintSize="512.6666666666666,752.6666666666666" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[arrColumnsToAdd.Reverse]">
+        <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="reverse because each coumn will be set as the first one and this keeps the order from Config" DisplayName="For Each currentColumName" sap:VirtualizedContainerService.HintSize="513,740" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[arrColumnsToAdd.Reverse]">
           <ui:ForEach.Body>
             <ActivityAction x:TypeArguments="x:String">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="x:String" Name="currentColumName" />
               </ActivityAction.Argument>
-              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="468,559.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_5">
+              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="468,552" sap2010:WorkflowViewState.IdRef="Sequence_5">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="x:String" Name="strColumnValue" />
                 </Sequence.Variables>
@@ -266,7 +261,7 @@
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <Assign sap:VirtualizedContainerService.HintSize="434,118" sap2010:WorkflowViewState.IdRef="Assign_8">
+                <Assign sap:VirtualizedContainerService.HintSize="434,115" sap2010:WorkflowViewState.IdRef="Assign_8">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:String">[strColumnValue]</OutArgument>
                   </Assign.To>
@@ -276,8 +271,8 @@ in_dictDocData(currentColumName),
 Nothing	)]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[currentColumName]" DataTable="[dtToWrite]" DefaultValue="[strColumnValue]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="434,223.33333333333334" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" />
-                <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="434,158" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="SetOrdinal">
+                <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[currentColumName]" DataTable="[dtToWrite]" DefaultValue="[strColumnValue]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="434,218" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" />
+                <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="434,159" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="SetOrdinal">
                   <InvokeMethod.TargetObject>
                     <InArgument x:TypeArguments="sd:DataColumn">[dtToWrite.Columns(currentColumName)]</InArgument>
                   </InvokeMethod.TargetObject>
@@ -294,7 +289,7 @@ Nothing	)]</InArgument>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
         </ui:ForEach>
-        <Sequence DisplayName="values from json" sap:VirtualizedContainerService.HintSize="512.6666666666666,408" sap2010:WorkflowViewState.IdRef="Sequence_24">
+        <Sequence DisplayName="values from json" sap:VirtualizedContainerService.HintSize="513,406" sap2010:WorkflowViewState.IdRef="Sequence_24">
           <Sequence.Variables>
             <Variable x:TypeArguments="njl:JObject" Name="jobjFormattedResults" />
           </Sequence.Variables>
@@ -303,8 +298,8 @@ Nothing	)]</InArgument>
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:DeserializeJson x:TypeArguments="njl:JObject" JsonSample="{x:Null}" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="478.6666666666667,124" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[jobjFormattedResults]" JsonString="[in_strJsonFromattedResults]" />
-          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478.6666666666667,201.33333333333334" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+          <ui:DeserializeJson x:TypeArguments="njl:JObject" JsonSample="{x:Null}" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="479,122" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[jobjFormattedResults]" JsonString="[in_strJsonFromattedResults]" />
+          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,201" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
             <ui:MultipleAssign.AssignOperations>
               <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                 <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -337,7 +332,7 @@ Nothing	)]</InArgument>
         </Sequence>
       </Sequence>
     </Sequence>
-    <Assign sap2010:Annotation.AnnotationText="escaping comma inside the fileds so it will not break csv" DisplayName="Assign strRowToAppend" sap:VirtualizedContainerService.HintSize="580.6666666666666,148" sap2010:WorkflowViewState.IdRef="Assign_9">
+    <Assign sap2010:Annotation.AnnotationText="escaping comma inside the fileds so it will not break csv" DisplayName="Assign strRowToAppend" sap:VirtualizedContainerService.HintSize="581,145" sap2010:WorkflowViewState.IdRef="Assign_9">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[strRowToAppend]</OutArgument>
       </Assign.To>
@@ -350,7 +345,7 @@ Nothing	)]</InArgument>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <If Condition="[File.Exists(in_strMasterLogFilePath)]" DisplayName="If File exists" sap:VirtualizedContainerService.HintSize="580.6666666666666,1554" sap2010:WorkflowViewState.IdRef="If_2">
+    <If Condition="[File.Exists(in_strMasterLogFilePath)]" DisplayName="If File exists" sap:VirtualizedContainerService.HintSize="581,1535" sap2010:WorkflowViewState.IdRef="If_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -358,23 +353,23 @@ Nothing	)]</InArgument>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_13">
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,224" sap2010:WorkflowViewState.IdRef="Sequence_13">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;Master log file exists&quot;]" />
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,164" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;Master log file exists&quot;]" />
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="484,1154.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_14">
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="484,1141" sap2010:WorkflowViewState.IdRef="Sequence_14">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <If Condition="[Directory.Exists(Path.GetDirectoryName(in_strMasterLogFilePath))]" DisplayName="If Folder exists" sap:VirtualizedContainerService.HintSize="450,1094.6666666666667" sap2010:WorkflowViewState.IdRef="If_1">
+          <If Condition="[Directory.Exists(Path.GetDirectoryName(in_strMasterLogFilePath))]" DisplayName="If Folder exists" sap:VirtualizedContainerService.HintSize="450,1081" sap2010:WorkflowViewState.IdRef="If_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -382,32 +377,32 @@ Nothing	)]</InArgument>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,404" sap2010:WorkflowViewState.IdRef="Sequence_11">
+              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,399" sap2010:WorkflowViewState.IdRef="Sequence_11">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;Creating new Master log file at &quot;+in_strMasterLogFilePath]" />
-                <ui:WriteTextFile File="{x:Null}" Output="{x:Null}" DisplayName="Write Text File" FileName="[in_strMasterLogFilePath]" sap:VirtualizedContainerService.HintSize="382,167.33333333333334" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[String.Join(&quot;,&quot;, dtToWrite.Columns.Cast(Of DataColumn).Select(Function(c) c.ColumnName))]" />
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,173" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;Creating new Master log file at &quot;+in_strMasterLogFilePath]" />
+                <ui:WriteTextFile File="{x:Null}" Output="{x:Null}" DisplayName="Write Text File" FileName="[in_strMasterLogFilePath]" sap:VirtualizedContainerService.HintSize="382,166" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[String.Join(&quot;,&quot;, dtToWrite.Columns.Cast(Of DataColumn).Select(Function(c) c.ColumnName))]" />
               </Sequence>
             </If.Then>
             <If.Else>
-              <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,528" sap2010:WorkflowViewState.IdRef="Sequence_12">
+              <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,521" sap2010:WorkflowViewState.IdRef="Sequence_12">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;Creating new folder and Master log file at &quot;+in_strMasterLogFilePath]" />
-                <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="382,124" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[Path.GetDirectoryName(in_strMasterLogFilePath)]" />
-                <ui:WriteTextFile File="{x:Null}" Output="{x:Null}" DisplayName="Write Text File" FileName="[in_strMasterLogFilePath]" sap:VirtualizedContainerService.HintSize="382,167.33333333333334" sap2010:WorkflowViewState.IdRef="WriteTextFile_2" Text="[String.Join(&quot;,&quot;, dtToWrite.Columns.Cast(Of DataColumn).Select(Function(c) c.ColumnName))]" />
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,173" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;Creating new folder and Master log file at &quot;+in_strMasterLogFilePath]" />
+                <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="382,122" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[Path.GetDirectoryName(in_strMasterLogFilePath)]" />
+                <ui:WriteTextFile File="{x:Null}" Output="{x:Null}" DisplayName="Write Text File" FileName="[in_strMasterLogFilePath]" sap:VirtualizedContainerService.HintSize="382,166" sap2010:WorkflowViewState.IdRef="WriteTextFile_2" Text="[String.Join(&quot;,&quot;, dtToWrite.Columns.Cast(Of DataColumn).Select(Function(c) c.ColumnName))]" />
               </Sequence>
             </If.Else>
           </If>
         </Sequence>
       </If.Else>
     </If>
-    <ui:AppendLine File="{x:Null}" DisplayName="Append Line" FileName="[in_strMasterLogFilePath]" sap:VirtualizedContainerService.HintSize="580.6666666666666,159.33333333333334" sap2010:WorkflowViewState.IdRef="AppendLine_1" Text="[strRowToAppend]" UseDefaultEncoding="False" />
+    <ui:AppendLine File="{x:Null}" DisplayName="Append Line" FileName="[in_strMasterLogFilePath]" sap:VirtualizedContainerService.HintSize="581,156" sap2010:WorkflowViewState.IdRef="AppendLine_1" Text="[strRowToAppend]" UseDefaultEncoding="False" />
   </Sequence>
 </Activity>

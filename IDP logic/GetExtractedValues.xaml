@@ -38,6 +38,7 @@
       <x:String>UiPath.Platform.ResourceHandling</x:String>
       <x:String>UM_DelegationPerformer</x:String>
       <x:String>System.Globalization</x:String>
+      <x:String>UM_Auth_PatientExtraction</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -107,6 +108,7 @@
       <AssemblyReference>System.IO.Packaging</AssemblyReference>
       <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
       <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>UM_Auth_PatientExtraction.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap:VirtualizedContainerService.HintSize="1540,891" sap2010:WorkflowViewState.IdRef="Sequence_12">
@@ -124,7 +126,7 @@
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Assign DisplayName="convert to dictioanry" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_7">
+      <Assign DisplayName="convert to dictioanry" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_12">
         <Assign.To>
           <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[dictDataFromDocument]</OutArgument>
         </Assign.To>

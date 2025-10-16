@@ -118,7 +118,7 @@
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="CheckExtractionResults" sap:VirtualizedContainerService.HintSize="1540,969" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="CheckExtractionResults" sap:VirtualizedContainerService.HintSize="1540,1628" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="njl:JObject" Name="jsonObjectExtractionResults" />
       <Variable x:TypeArguments="x:Boolean" Name="blnHasLowConfidence" />
@@ -135,7 +135,7 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:Comment sap:VirtualizedContainerService.HintSize="468,145" sap2010:WorkflowViewState.IdRef="Comment_1" Text="!!! If any of the mandatory fields (Vendor, Facility, or Doc Type) are identified as Out Of Scope, the robot will throw an exception and skip HITL, even if the confidence is low" />
-    <ui:CommentOut sap2010:Annotation.AnnotationText="Check Out of Scope payor - TBD if required" DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="452,338" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+    <ui:CommentOut sap2010:Annotation.AnnotationText="Check Out of Scope payor - TBD if required" DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="468,410" sap2010:WorkflowViewState.IdRef="CommentOut_1">
       <ui:CommentOut.Body>
         <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,228" sap2010:WorkflowViewState.IdRef="Sequence_7">
           <sap:WorkflowViewStateService.ViewState>
@@ -154,13 +154,13 @@
       </ui:CommentOut.Body>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <Sequence DisplayName="Low confidence (HITL)" sap:VirtualizedContainerService.HintSize="468,597" sap2010:WorkflowViewState.IdRef="Sequence_6">
+    <Sequence DisplayName="Low confidence (HITL)" sap:VirtualizedContainerService.HintSize="468,945" sap2010:WorkflowViewState.IdRef="Sequence_6">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -175,10 +175,10 @@
           <InArgument x:TypeArguments="x:Double">[CDbl(in_config("ConfidenceTopThreshold"))]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:LogMessage DisplayName="Log in_dblConfidenceTopThreshold" sap:VirtualizedContainerService.HintSize="434,57" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[&quot;ConfidenceTopThreshold: &quot;+in_dblConfidenceTopThreshold.ToString]">
+      <ui:LogMessage DisplayName="Log in_dblConfidenceTopThreshold" sap:VirtualizedContainerService.HintSize="434,173" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[&quot;ConfidenceTopThreshold: &quot;+in_dblConfidenceTopThreshold.ToString]">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
@@ -204,10 +204,10 @@
 )]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:LogMessage DisplayName="Log LowConfidenceFields" sap:VirtualizedContainerService.HintSize="434,57" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;LowConfidenceFields: &quot;+vbNewLine+ out_jarrLowConfidenceFields.ToString]">
+      <ui:LogMessage DisplayName="Log LowConfidenceFields" sap:VirtualizedContainerService.HintSize="434,173" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;LowConfidenceFields: &quot;+vbNewLine+ out_jarrLowConfidenceFields.ToString]">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
@@ -220,10 +220,10 @@
           <InArgument x:TypeArguments="x:Boolean">[out_jarrLowConfidenceFields.Count &gt;0]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,48" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;blnHasLowConfidence: &quot;+blnHasLowConfidence.tostring]">
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,164" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;blnHasLowConfidence: &quot;+blnHasLowConfidence.tostring]">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
