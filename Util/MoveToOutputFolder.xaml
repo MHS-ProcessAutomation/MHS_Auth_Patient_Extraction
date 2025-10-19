@@ -1,8 +1,8 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Move_To_Output_Folder" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Move_To_Output_Folder" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property sap2010:Annotation.AnnotationText="Bot/ folder" Name="in_strGeneralFolderPath" Type="InArgument(x:String)" />
     <x:Property Name="io_dictDocData" Type="InOutArgument(scg:Dictionary(x:String, x:String))" />
-    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property sap2010:Annotation.AnnotationText="Bot/ folder" Name="in_strFilePath" Type="InArgument(x:String)" />
+    <x:Property Name="in_botWorkingFolderPath" Type="InArgument(x:String)" />
   </x:Members>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
@@ -114,194 +114,88 @@
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="690,3644" sap2010:WorkflowViewState.IdRef="Sequence_9">
+  <Sequence sap:VirtualizedContainerService.HintSize="898.6666666666666,3667.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_9">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strNewFilePath" />
-      <Variable x:TypeArguments="x:String" Name="strDocTypeFileName" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Move to one of the folders" sap:VirtualizedContainerService.HintSize="547,3621" sap2010:WorkflowViewState.IdRef="Sequence_7">
+    <Sequence DisplayName="Move to one of the folders" sap:VirtualizedContainerService.HintSize="546.6666666666666,3644.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_7">
       <Sequence.Variables>
-        <Variable x:TypeArguments="x:String" Name="strFacilityFolder" />
-        <Variable x:TypeArguments="x:String" Name="strDocTypeFolder" />
-        <Variable x:TypeArguments="x:String" Name="strOutputFolderPath" />
-        <Variable x:TypeArguments="x:String" Name="strFacilityShortName" />
-        <Variable x:TypeArguments="x:String" Name="strVendorShortName" />
-        <Variable x:TypeArguments="x:String" Name="strPatientLastName" />
-        <Variable x:TypeArguments="x:String" Name="strNumberMHD" />
+        <Variable x:TypeArguments="x:String" Name="strOutputFilePath" />
         <Variable x:TypeArguments="x:String" Name="strOriginalFileName" />
-        <Variable x:TypeArguments="x:String" Name="strNewFileName" />
         <Variable x:TypeArguments="x:Boolean" Name="blnFileExistsinNewLocation" />
-        <Variable x:TypeArguments="sd:DataTable" Name="dtDocTypeToFolderMapping" />
-        <Variable x:TypeArguments="sd:DataTable" Name="dtFacilityToFolderMapping" />
-        <Variable x:TypeArguments="sd:DataTable" Name="dtVendorToFolderMapping" />
+        <Variable x:TypeArguments="x:String" Name="fileName" />
+        <Variable x:TypeArguments="x:String" Name="authEntryFolderPath" />
       </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence DisplayName="init vars" sap:VirtualizedContainerService.HintSize="513,744" sap2010:WorkflowViewState.IdRef="Sequence_12">
+      <Sequence DisplayName="init vars" sap:VirtualizedContainerService.HintSize="512.6666666666666,324" sap2010:WorkflowViewState.IdRef="Sequence_12">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:String" Name="botWorkingFolder" />
+        </Sequence.Variables>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <ui:MultipleAssign DisplayName="Multiple Assign mappings dts" sap:VirtualizedContainerService.HintSize="479,210" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+        <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478.6666666666667,232" sap2010:WorkflowViewState.IdRef="MultipleAssign_6">
           <ui:MultipleAssign.AssignOperations>
             <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_16">
                 <ui:AssignOperation.To>
-                  <OutArgument x:TypeArguments="sd:DataTable">[dtDocTypeToFolderMapping]</OutArgument>
+                  <OutArgument x:TypeArguments="x:String">[fileName]</OutArgument>
                 </ui:AssignOperation.To>
                 <ui:AssignOperation.Value>
-                  <InArgument x:TypeArguments="sd:DataTable">[CType(in_Config("DocTypeToFolderMapping"), DataTable)]</InArgument>
+                  <InArgument x:TypeArguments="x:String">[Path.GetFileName(in_strFilePath)]</InArgument>
                 </ui:AssignOperation.Value>
               </ui:AssignOperation>
-              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
                 <ui:AssignOperation.To>
-                  <OutArgument x:TypeArguments="sd:DataTable">[dtFacilityToFolderMapping]</OutArgument>
+                  <OutArgument x:TypeArguments="x:String">[botWorkingFolder]</OutArgument>
                 </ui:AssignOperation.To>
                 <ui:AssignOperation.Value>
-                  <InArgument x:TypeArguments="sd:DataTable">[CType(in_Config("FacilityToFolderMapping"), DataTable)]</InArgument>
+                  <InArgument x:TypeArguments="x:String">[in_botWorkingFolderPath]</InArgument>
                 </ui:AssignOperation.Value>
               </ui:AssignOperation>
-              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_18">
                 <ui:AssignOperation.To>
-                  <OutArgument x:TypeArguments="sd:DataTable">[dtVendorToFolderMapping]</OutArgument>
+                  <OutArgument x:TypeArguments="x:String">[authEntryFolderPath]</OutArgument>
                 </ui:AssignOperation.To>
                 <ui:AssignOperation.Value>
-                  <InArgument x:TypeArguments="sd:DataTable">[CType(in_Config("VendorToFolderMapping"), DataTable)]</InArgument>
+                  <InArgument x:TypeArguments="x:String">[Path.Combine(Directory.GetParent(Directory.GetParent(in_strFilePath).FullName).FullName, botWorkingFolder)]</InArgument>
                 </ui:AssignOperation.Value>
               </ui:AssignOperation>
-            </scg:List>
-          </ui:MultipleAssign.AssignOperations>
-        </ui:MultipleAssign>
-        <ui:MultipleAssign DisplayName="Multiple Assign mapping values" sap:VirtualizedContainerService.HintSize="479,272" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
-          <ui:MultipleAssign.AssignOperations>
-            <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
-              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_19">
                 <ui:AssignOperation.To>
-                  <OutArgument x:TypeArguments="x:String">[strFacilityFolder]</OutArgument>
+                  <OutArgument x:TypeArguments="x:String">[strOutputFilePath]</OutArgument>
                 </ui:AssignOperation.To>
                 <ui:AssignOperation.Value>
-                  <InArgument x:TypeArguments="x:String" xml:space="preserve">[dtFacilityToFolderMapping.AsEnumerable().
-Where(Function(row) row.Field(Of String)("IXP Facility").toupper.Equals(io_dictDocData("Facility").ToUpper)).
-Select(Function(row) row.Field(Of String)("Folder Name")).
-First()]</InArgument>
-                </ui:AssignOperation.Value>
-              </ui:AssignOperation>
-              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
-                <ui:AssignOperation.To>
-                  <OutArgument x:TypeArguments="x:String">[strDocTypeFolder]</OutArgument>
-                </ui:AssignOperation.To>
-                <ui:AssignOperation.Value>
-                  <InArgument x:TypeArguments="x:String" xml:space="preserve">[dtDocTypeToFolderMapping.AsEnumerable().
-Where(Function(row) row.Field(Of String)("IXP Document Type").toupper.Equals(io_dictDocData("Document Type").ToUpper)).
-Select(Function(row) row.Field(Of String)("Folder Name")).
-First()]</InArgument>
-                </ui:AssignOperation.Value>
-              </ui:AssignOperation>
-              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
-                <ui:AssignOperation.To>
-                  <OutArgument x:TypeArguments="x:String">[strFacilityShortName]</OutArgument>
-                </ui:AssignOperation.To>
-                <ui:AssignOperation.Value>
-                  <InArgument x:TypeArguments="x:String" xml:space="preserve">[dtFacilityToFolderMapping.AsEnumerable().
-Where(Function(row) row.Field(Of String)("IXP Facility").ToUpper.Equals(io_dictDocData("Facility").ToUpper)).
-Select(Function(row) row.Field(Of String)("Short Name")).
-First()]</InArgument>
-                </ui:AssignOperation.Value>
-              </ui:AssignOperation>
-              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
-                <ui:AssignOperation.To>
-                  <OutArgument x:TypeArguments="x:String">[strVendorShortName]</OutArgument>
-                </ui:AssignOperation.To>
-                <ui:AssignOperation.Value>
-                  <InArgument x:TypeArguments="x:String" xml:space="preserve">[dtVendorToFolderMapping.AsEnumerable().
-Where(Function(row) row.Field(Of String)("IXP Vendor").ToUpper.Equals(io_dictDocData("Vendor").ToUpper)).
-Select(Function(row) row.Field(Of String)("Short Name")).
-First()]</InArgument>
-                </ui:AssignOperation.Value>
-              </ui:AssignOperation>
-              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
-                <ui:AssignOperation.To>
-                  <OutArgument x:TypeArguments="x:String">[strDocTypeFileName]</OutArgument>
-                </ui:AssignOperation.To>
-                <ui:AssignOperation.Value>
-                  <InArgument x:TypeArguments="x:String" xml:space="preserve">[dtDocTypeToFolderMapping.AsEnumerable().
-Where(Function(row) row.Field(Of String)("IXP Document Type").toupper.Equals(io_dictDocData("Document Type").ToUpper)).
-Select(Function(row) row.Field(Of String)("File Name")).
-First()]</InArgument>
-                </ui:AssignOperation.Value>
-              </ui:AssignOperation>
-            </scg:List>
-          </ui:MultipleAssign.AssignOperations>
-        </ui:MultipleAssign>
-        <ui:MultipleAssign DisplayName="Multiple Assign clarity values" sap:VirtualizedContainerService.HintSize="479,147" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
-          <ui:MultipleAssign.AssignOperations>
-            <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-              <ui:AssignOperation sap:VirtualizedContainerService.HintSize="334,25" sap2010:WorkflowViewState.IdRef="AssignOperation_5">
-                <ui:AssignOperation.To>
-                  <OutArgument x:TypeArguments="x:String">[strPatientLastName]</OutArgument>
-                </ui:AssignOperation.To>
-                <ui:AssignOperation.Value>
-                  <InArgument x:TypeArguments="x:String">[if(io_dictDocData("Patient Last Name") is Nothing,"NAME_NOT_FOUND",io_dictDocData("Patient Last Name"))]</InArgument>
-                </ui:AssignOperation.Value>
-              </ui:AssignOperation>
-              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
-                <ui:AssignOperation.To>
-                  <OutArgument x:TypeArguments="x:String">[strNumberMHD]</OutArgument>
-                </ui:AssignOperation.To>
-                <ui:AssignOperation.Value>
-                  <InArgument x:TypeArguments="x:String">[if(io_dictDocData("MHD Number") is Nothing,"MHD#_NOT_FOUND",io_dictDocData("MHD Number"))]</InArgument>
+                  <InArgument x:TypeArguments="x:String">[path.Combine(authEntryFolderPath,fileName)]</InArgument>
                 </ui:AssignOperation.Value>
               </ui:AssignOperation>
             </scg:List>
           </ui:MultipleAssign.AssignOperations>
         </ui:MultipleAssign>
       </Sequence>
-      <Assign sap:VirtualizedContainerService.HintSize="513,114" sap2010:WorkflowViewState.IdRef="Assign_1">
-        <Assign.To>
-          <OutArgument x:TypeArguments="x:String">[strOutputFolderPath]</OutArgument>
-        </Assign.To>
-        <Assign.Value>
-          <InArgument x:TypeArguments="x:String">[path.Combine(in_strGeneralFolderPath,strFacilityFolder,strDocTypeFolder)]</InArgument>
-        </Assign.Value>
-      </Assign>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="513,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;strOutputFolderPath: &quot;+strOutputFolderPath]" />
-      <Assign sap:VirtualizedContainerService.HintSize="513,114" sap2010:WorkflowViewState.IdRef="Assign_3">
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="512.6666666666666,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;strOutputFolderPath: &quot;+strOutputFilePath]" />
+      <Assign sap:VirtualizedContainerService.HintSize="512.6666666666666,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_3">
         <Assign.To>
           <OutArgument x:TypeArguments="x:String">[strOriginalFileName]</OutArgument>
         </Assign.To>
         <Assign.Value>
-          <InArgument x:TypeArguments="x:String">[System.IO.Path.GetFileNameWithoutExtension(io_dictDocData("File Path"))]</InArgument>
+          <InArgument x:TypeArguments="x:String">[System.IO.Path.GetFileNameWithoutExtension(io_dictDocData("New File Path"))]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="513,173" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;strOriginalFileName: &quot;+strOriginalFileName]" />
-      <Assign sap:VirtualizedContainerService.HintSize="513,114" sap2010:WorkflowViewState.IdRef="Assign_2">
-        <Assign.To>
-          <OutArgument x:TypeArguments="x:String">[strNewFileName]</OutArgument>
-        </Assign.To>
-        <Assign.Value>
-          <InArgument x:TypeArguments="x:String">[String.Join(" ",strFacilityShortName,strDocTypeFileName,strVendorShortName,strPatientLastName,strNumberMHD,strOriginalFileName).Trim+".pdf"]</InArgument>
-        </Assign.Value>
-      </Assign>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="513,173" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;strNewFileName: &quot;+strNewFileName]" />
-      <Assign sap:VirtualizedContainerService.HintSize="513,114" sap2010:WorkflowViewState.IdRef="Assign_4">
-        <Assign.To>
-          <OutArgument x:TypeArguments="x:String">[strNewFilePath]</OutArgument>
-        </Assign.To>
-        <Assign.Value>
-          <InArgument x:TypeArguments="x:String">[path.Combine(strOutputFolderPath,strNewFileName)]</InArgument>
-        </Assign.Value>
-      </Assign>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="513,173" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;strNewFilePath: &quot;+strNewFilePath]" />
-      <If Condition="[strNewFilePath.Length &lt;= 260 AndAlso &#xA;strNewFilePath.IndexOfAny(System.IO.Path.GetInvalidPathChars()) = -1 AndAlso &#xA;Not strNewFilePath.Split(&quot;\&quot;c).Any(Function(p) p.Length &gt; 255)]" DisplayName="If new name ok with windows" sap:VirtualizedContainerService.HintSize="513,905" sap2010:WorkflowViewState.IdRef="If_2">
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="512.6666666666666,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;strOriginalFileName: &quot;+strOriginalFileName]" />
+      <If Condition="[strOutputFilePath.Length &lt;= 260 AndAlso &#xD;&#xA;strOutputFilePath.IndexOfAny(System.IO.Path.GetInvalidPathChars()) = -1 AndAlso &#xD;&#xA;Not strOutputFilePath.Split(&quot;\&quot;c).Any(Function(p) p.Length &gt; 255)]" DisplayName="If new name ok with windows" sap:VirtualizedContainerService.HintSize="512.6666666666666,920.6666666666666" sap2010:WorkflowViewState.IdRef="If_2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -309,134 +203,102 @@ First()]</InArgument>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <If.Then>
-          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,224" sap2010:WorkflowViewState.IdRef="Sequence_16">
+          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_16">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,164" sap2010:WorkflowViewState.IdRef="LogMessage_9" Message="[&quot;New name doesn't violate windows restrictions&quot;]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_9" Message="[&quot;New name doesn't violate windows restrictions&quot;]" />
           </Sequence>
         </If.Then>
         <If.Else>
-          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="468,511" sap2010:WorkflowViewState.IdRef="Sequence_17">
+          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="468,521.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_17">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,173" sap2010:WorkflowViewState.IdRef="LogMessage_11" Message="[&quot;New name can't be used due to windows restrictions. Will move file with old name&quot;]" />
-            <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_10">
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_11" Message="[&quot;New name can't be used due to windows restrictions. Will move file with old name&quot;]" />
+            <Assign sap:VirtualizedContainerService.HintSize="434,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_10">
               <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[strNewFilePath]</OutArgument>
+                <OutArgument x:TypeArguments="x:String">[strOutputFilePath]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[path.Combine(strOutputFolderPath,strOriginalFileName+".pdf")]</InArgument>
+                <InArgument x:TypeArguments="x:String">[path.Combine(strOutputFilePath,strOriginalFileName+".pdf")]</InArgument>
               </Assign.Value>
             </Assign>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,164" sap2010:WorkflowViewState.IdRef="LogMessage_12" Message="[&quot;strNewFilePath: &quot;+strNewFilePath]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_12" Message="[&quot;strNewFilePath: &quot;+strNewFilePath]" />
           </Sequence>
         </If.Else>
       </If>
-      <Sequence DisplayName="Create Folder if needed" sap:VirtualizedContainerService.HintSize="513,57" sap2010:WorkflowViewState.IdRef="Sequence_13">
+      <Sequence DisplayName="Create Folder if needed" sap:VirtualizedContainerService.HintSize="512.6666666666666,833.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_13">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <If Condition="[Directory.Exists(strOutputFolderPath)]" sap:VirtualizedContainerService.HintSize="450,721" sap2010:WorkflowViewState.IdRef="If_1">
+        <If Condition="[Directory.Exists(authEntryFolderPath)]" sap:VirtualizedContainerService.HintSize="450,741.3333333333334" sap2010:WorkflowViewState.IdRef="If_1">
           <If.Then>
-            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,224" sap2010:WorkflowViewState.IdRef="Sequence_14">
+            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_14">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,164" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[&quot;Output Folder already Exists&quot;]" />
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[&quot;Output Folder already Exists&quot;]" />
             </Sequence>
           </If.Then>
           <If.Else>
-            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,336" sap2010:WorkflowViewState.IdRef="Sequence_15">
+            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,351.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_15">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="382,112" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[strOutputFolderPath]" />
-              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,164" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[&quot;Created Output Folder&quot;]" />
+              <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="382,124" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[authEntryFolderPath]" />
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[&quot;Created Output Folder&quot;]" />
             </Sequence>
           </If.Else>
         </If>
       </Sequence>
-      <ui:MoveFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" Destination="[strNewFilePath]" DisplayName="Move and rename File" sap:VirtualizedContainerService.HintSize="513,191" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="True" Path="[io_dictDocData(&quot;File Path&quot;)]" />
-      <ui:RetryScope LogRetriedExceptions="{x:Null}" RetriedExceptionsLogLevel="{x:Null}" DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="513,57" sap2010:WorkflowViewState.IdRef="RetryScope_1">
+      <ui:MoveFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" Destination="[strOutputFilePath]" DisplayName="Move and rename File" sap:VirtualizedContainerService.HintSize="512.6666666666666,196.66666666666666" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="True" Path="[io_dictDocData(&quot;New File Path&quot;)]" />
+      <ui:RetryScope LogRetriedExceptions="{x:Null}" RetriedExceptionsLogLevel="{x:Null}" DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="512.6666666666666,500" sap2010:WorkflowViewState.IdRef="RetryScope_1">
         <ui:RetryScope.ActivityBody>
           <ActivityAction>
-            <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="416,198" sap2010:WorkflowViewState.IdRef="Sequence_10">
+            <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="416,226.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_10">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[blnFileExistsinNewLocation]" sap:VirtualizedContainerService.HintSize="382,138" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="[strNewFilePath]" PathType="File" />
+              <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[blnFileExistsinNewLocation]" sap:VirtualizedContainerService.HintSize="382,166.66666666666666" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="[strOutputFilePath]" PathType="Folder" />
             </Sequence>
           </ActivityAction>
         </ui:RetryScope.ActivityBody>
         <ui:RetryScope.Condition>
           <ActivityFunc x:TypeArguments="x:Boolean">
-            <ui:CheckTrue DisplayName="Check True" ErrorMessage="File not found in the new location" Expression="[blnFileExistsinNewLocation]" sap:VirtualizedContainerService.HintSize="334,129" sap2010:WorkflowViewState.IdRef="CheckTrue_1" />
+            <ui:CheckTrue DisplayName="Check True" ErrorMessage="File not found in the new location" Expression="[blnFileExistsinNewLocation]" sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="CheckTrue_1" />
           </ActivityFunc>
         </ui:RetryScope.Condition>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:RetryScope>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="513,173" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;Post check: File exists in new location&quot;]" />
-      <ui:MultipleAssign DisplayName="Update dictDocData" sap:VirtualizedContainerService.HintSize="513,263" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="512.6666666666666,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;Post check: File exists in new location&quot;]" />
+      <ui:MultipleAssign DisplayName="Update dictDocData" sap:VirtualizedContainerService.HintSize="512.6666666666666,140" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
         <ui:MultipleAssign.AssignOperations>
           <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
             <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
               <ui:AssignOperation.To>
-                <OutArgument x:TypeArguments="x:String">[io_dictDocData("New File Path")]</OutArgument>
+                <OutArgument x:TypeArguments="x:String">[io_dictDocData("Auth Entry File Path")]</OutArgument>
               </ui:AssignOperation.To>
               <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[strNewFilePath]</InArgument>
-              </ui:AssignOperation.Value>
-            </ui:AssignOperation>
-            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
-              <ui:AssignOperation.To>
-                <OutArgument x:TypeArguments="x:String">[io_dictDocData("Facility Short Name")]</OutArgument>
-              </ui:AssignOperation.To>
-              <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[strFacilityShortName]</InArgument>
-              </ui:AssignOperation.Value>
-            </ui:AssignOperation>
-            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
-              <ui:AssignOperation.To>
-                <OutArgument x:TypeArguments="x:String">[io_dictDocData("Vendor Short Name")]</OutArgument>
-              </ui:AssignOperation.To>
-              <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[strVendorShortName]</InArgument>
-              </ui:AssignOperation.Value>
-            </ui:AssignOperation>
-            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
-              <ui:AssignOperation.To>
-                <OutArgument x:TypeArguments="x:String">[io_dictDocData("Document Type File Name")]</OutArgument>
-              </ui:AssignOperation.To>
-              <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[strDocTypeFileName]</InArgument>
-              </ui:AssignOperation.Value>
-            </ui:AssignOperation>
-            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_15">
-              <ui:AssignOperation.To>
-                <OutArgument x:TypeArguments="x:String">[io_dictDocData("New File Name")]</OutArgument>
-              </ui:AssignOperation.To>
-              <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[strNewFileName]</InArgument>
+                <InArgument x:TypeArguments="x:String">[strOutputFilePath]</InArgument>
               </ui:AssignOperation.Value>
             </ui:AssignOperation>
           </scg:List>

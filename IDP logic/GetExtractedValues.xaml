@@ -111,13 +111,13 @@
       <AssemblyReference>UM_Auth_PatientExtraction.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="1540,891" sap2010:WorkflowViewState.IdRef="Sequence_12">
+  <Sequence sap:VirtualizedContainerService.HintSize="900,1006" sap2010:WorkflowViewState.IdRef="Sequence_12">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Get Exracted Values" sap:VirtualizedContainerService.HintSize="468,868" sap2010:WorkflowViewState.IdRef="Sequence_11">
+    <Sequence DisplayName="Get Exracted Values" sap:VirtualizedContainerService.HintSize="468,983" sap2010:WorkflowViewState.IdRef="Sequence_11">
       <Sequence.Variables>
         <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dictDataFromDocument" />
       </Sequence.Variables>
@@ -148,14 +148,29 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </Assign>
-      <Assign DisplayName="convert date format" sap:VirtualizedContainerService.HintSize="434,115" sap2010:WorkflowViewState.IdRef="Assign_8">
+      <Assign DisplayName="convert Admit Date format" sap:VirtualizedContainerService.HintSize="434,115" sap2010:WorkflowViewState.IdRef="Assign_8">
         <Assign.To>
-          <OutArgument x:TypeArguments="x:String">[io_dictDocData("Patient Date of Birth")]</OutArgument>
+          <OutArgument x:TypeArguments="x:String">[io_dictDocData("Admit Date")]</OutArgument>
         </Assign.To>
         <Assign.Value>
-          <InArgument x:TypeArguments="x:String" xml:space="preserve">[If(io_dictDocData.ContainsKey("Patient Date of Birth"),
+          <InArgument x:TypeArguments="x:String" xml:space="preserve">[If(io_dictDocData.ContainsKey("Admit Date"),
    DateTime.ParseExact(
-       io_dictDocData("Patient Date of Birth"),
+       io_dictDocData("Admit Date"),
+       in_Config("DateFormats").ToString.Split(";"c).Select(Function(f) f.Trim(""""c)).ToArray(),
+       System.Globalization.CultureInfo.InvariantCulture,
+       System.Globalization.DateTimeStyles.None
+   ).ToString("yyyy-MM-dd"),
+   Nothing)]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="convert End of service Date format" sap:VirtualizedContainerService.HintSize="434,115" sap2010:WorkflowViewState.IdRef="Assign_13">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[io_dictDocData("End of service")]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String" xml:space="preserve">[If(io_dictDocData.ContainsKey("End of service"),
+   DateTime.ParseExact(
+       io_dictDocData("End of service"),
        in_Config("DateFormats").ToString.Split(";"c).Select(Function(f) f.Trim(""""c)).ToArray(),
        System.Globalization.CultureInfo.InvariantCulture,
        System.Globalization.DateTimeStyles.None
