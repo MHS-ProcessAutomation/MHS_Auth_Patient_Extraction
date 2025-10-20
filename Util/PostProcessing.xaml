@@ -175,7 +175,6 @@
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Move To Output Folder - Invoke Workflow File (Move To Output Folder.xaml)" sap:VirtualizedContainerService.HintSize="478.6666666666667,177.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="Util\MoveToOutputFolder.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_dictDocData">[io_dictDocData]</InOutArgument>
-          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
           <InArgument x:TypeArguments="x:String" x:Key="in_strFilePath">[in_strFilePath]</InArgument>
           <InArgument x:TypeArguments="x:String" x:Key="in_botWorkingFolderPath">[in_Config("BotGeneralWorkingFolderPath").ToString]</InArgument>
         </ui:InvokeWorkflowFile.Arguments>

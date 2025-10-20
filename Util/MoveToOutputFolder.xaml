@@ -195,7 +195,7 @@
         </Assign.Value>
       </Assign>
       <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="512.6666666666666,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;strOriginalFileName: &quot;+strOriginalFileName]" />
-      <If Condition="[strOutputFilePath.Length &lt;= 260 AndAlso &#xD;&#xA;strOutputFilePath.IndexOfAny(System.IO.Path.GetInvalidPathChars()) = -1 AndAlso &#xD;&#xA;Not strOutputFilePath.Split(&quot;\&quot;c).Any(Function(p) p.Length &gt; 255)]" DisplayName="If new name ok with windows" sap:VirtualizedContainerService.HintSize="512.6666666666666,920.6666666666666" sap2010:WorkflowViewState.IdRef="If_2">
+      <If Condition="[strOutputFilePath.Length &lt;= 260 AndAlso &#xA;strOutputFilePath.IndexOfAny(System.IO.Path.GetInvalidPathChars()) = -1 AndAlso &#xA;Not strOutputFilePath.Split(&quot;\&quot;c).Any(Function(p) p.Length &gt; 255)]" DisplayName="If new name ok with windows" sap:VirtualizedContainerService.HintSize="512.6666666666666,920.6666666666666" sap2010:WorkflowViewState.IdRef="If_2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -228,7 +228,7 @@
                 <InArgument x:TypeArguments="x:String">[path.Combine(strOutputFilePath,strOriginalFileName+".pdf")]</InArgument>
               </Assign.Value>
             </Assign>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_12" Message="[&quot;strNewFilePath: &quot;+strNewFilePath]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_13" Message="[&quot;strOutputFilePath: &quot;+strOutputFilePath]" />
           </Sequence>
         </If.Else>
       </If>
@@ -273,7 +273,7 @@
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[blnFileExistsinNewLocation]" sap:VirtualizedContainerService.HintSize="382,166.66666666666666" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="[strOutputFilePath]" PathType="Folder" />
+              <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[blnFileExistsinNewLocation]" sap:VirtualizedContainerService.HintSize="382,166.66666666666666" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="[strOutputFilePath]" PathType="File" />
             </Sequence>
           </ActivityAction>
         </ui:RetryScope.ActivityBody>

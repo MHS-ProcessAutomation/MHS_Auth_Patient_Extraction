@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Check_Results_for_Out_Of_Scope" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Check_Results_for_Out_Of_Scope" this:Check_Results_for_Out_Of_Scope.in_strJsonExtractionResults="\\firework\data\Automation\staff\Revenue Cycle\UM Auth Entry Patient Data Extraction\Output\Extraction Results\Extraction ResultsFormattedExtractionResults.json" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ue="clr-namespace:UiPath.Excel;assembly=UiPath.Excel.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="in_strJsonExtractionResults" Type="InArgument(x:String)" />
@@ -43,6 +43,10 @@
       <x:String>GlobalConstantsNamespace</x:String>
       <x:String>System.Linq.Expressions</x:String>
       <x:String>System.Numerics</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Excel.Model</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -110,20 +114,28 @@
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.DocumentUnderstanding.ML.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.IntelligentOCR.StudioWeb.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="900,3144" sap2010:WorkflowViewState.IdRef="Sequence_24">
+  <Sequence sap:VirtualizedContainerService.HintSize="898.6666666666666,3922" sap2010:WorkflowViewState.IdRef="Sequence_24">
     <Sequence.Variables>
       <Variable x:TypeArguments="s:String[]" Name="arrMissingMandatoryFields" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="arrOutOfScopeMandatoryFields" />
       <Variable x:TypeArguments="sd:DataTable" Name="dtDocumentFields" />
+      <Variable x:TypeArguments="x:Boolean" Name="blnIfFieldExists" />
+      <Variable x:TypeArguments="scg:List(x:String)" Name="listMissingMandatoryFields" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="int vars" sap:VirtualizedContainerService.HintSize="604,311" sap2010:WorkflowViewState.IdRef="Sequence_33">
+    <Sequence DisplayName="int vars" sap:VirtualizedContainerService.HintSize="604,314.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_33">
       <Sequence.Variables>
         <Variable x:TypeArguments="sd:DataTable" Name="dtDocTypeToFolderMapping" />
         <Variable x:TypeArguments="sd:DataTable" Name="dtFacilityToFolderMapping" />
@@ -135,7 +147,7 @@
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="434,57" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="434,57.333333333333336" sap2010:WorkflowViewState.IdRef="CommentOut_1">
         <ui:CommentOut.Body>
           <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="513,261" sap2010:WorkflowViewState.IdRef="Sequence_36">
             <sap:WorkflowViewStateService.ViewState>
@@ -182,7 +194,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:CommentOut>
-      <Assign DisplayName="Assign dtDocumentFields" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_22">
+      <Assign DisplayName="Assign dtDocumentFields" sap:VirtualizedContainerService.HintSize="434,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_22">
         <Assign.To>
           <OutArgument x:TypeArguments="sd:DataTable">[dtDocumentFields]</OutArgument>
         </Assign.To>
@@ -250,15 +262,12 @@
         </sap:WorkflowViewStateService.ViewState>
       </ui:CommentOut>
     </Sequence>
-    <ui:DeserializeJson x:TypeArguments="njl:JObject" JsonSample="{x:Null}" DisplayName="Deserialize JSON ExtractionResults" sap:VirtualizedContainerService.HintSize="604,122" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[out_jsonObjectExtractionResults]" JsonString="[in_strJsonExtractionResults]" />
-    <Sequence DisplayName="Check mandatory and out of scope" sap:VirtualizedContainerService.HintSize="604,2688" sap2010:WorkflowViewState.IdRef="Sequence_18">
+    <ui:DeserializeJson x:TypeArguments="njl:JObject" JsonSample="{x:Null}" DisplayName="Deserialize JSON ExtractionResults" sap:VirtualizedContainerService.HintSize="604,124" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[out_jsonObjectExtractionResults]" JsonString="[in_strJsonExtractionResults]" />
+    <Sequence DisplayName="Check mandatory and out of scope" sap:VirtualizedContainerService.HintSize="604,3460.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_18">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:Int32" Name="indexRow" />
-        <Variable x:TypeArguments="x:Int32" Name="counterEitherOrFields">
-          <Variable.Default>
-            <Literal x:TypeArguments="x:Int32" />
-          </Variable.Default>
-        </Variable>
+        <Variable x:TypeArguments="x:Int32" Default="0" Name="counterEitherOrFields" />
+        <Variable x:TypeArguments="ue:IReadWriteRangeRef" Name="table" />
       </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -266,35 +275,41 @@
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <If Condition="[out_jsonObjectExtractionResults(&quot;Data&quot;)(&quot;General&quot;) IsNot Nothing AndAlso &#xA;   out_jsonObjectExtractionResults(&quot;Data&quot;)(&quot;General&quot;).Count &gt; 0]" sap:VirtualizedContainerService.HintSize="570,567" sap2010:WorkflowViewState.IdRef="If_6">
+      <If Condition="[out_jsonObjectExtractionResults(&quot;Data&quot;)(&quot;Patient Data&quot;) IsNot Nothing AndAlso &#xD;&#xA;   out_jsonObjectExtractionResults(&quot;Data&quot;)(&quot;Patient Data&quot;).Count &gt; 0]" sap:VirtualizedContainerService.HintSize="570,57.333333333333336" sap2010:WorkflowViewState.IdRef="If_6">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
         <If.Then>
-          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,224" sap2010:WorkflowViewState.IdRef="Sequence_34">
+          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_34">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,164" sap2010:WorkflowViewState.IdRef="LogMessage_16" Message="[&quot;Parent of Mandatory fields exists&quot;]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_16" Message="[&quot;Parent of Mandatory fields exists&quot;]" />
           </Sequence>
         </If.Then>
         <If.Else>
-          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,173" sap2010:WorkflowViewState.IdRef="Sequence_35">
+          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,174.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_35">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Throw Exception="[New BusinessRuleException(&quot;All mandatory fields are missing from extraction results&quot;)]" sap:VirtualizedContainerService.HintSize="382,113" sap2010:WorkflowViewState.IdRef="Throw_4" />
+            <Throw Exception="[New BusinessRuleException(&quot;All mandatory fields are missing from extraction results&quot;)]" sap:VirtualizedContainerService.HintSize="382,114.66666666666667" sap2010:WorkflowViewState.IdRef="Throw_4" />
           </Sequence>
         </If.Else>
       </If>
-      <ui:ForEach x:TypeArguments="sd:DataRow" CurrentIndex="[indexRow]" DisplayName="For Each currentDataRow" sap:VirtualizedContainerService.HintSize="570,57" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[dtDocumentFields.AsEnumerable().Where(Function(row) row.Field(Of Boolean)(&quot;If Mandatory&quot;) = True)]">
+      <ui:ForEach x:TypeArguments="sd:DataRow" sap2010:Annotation.AnnotationText="For each mandatory value in `dtDocumentFields`, check if it exists in the extraction results and update the corresponding value in `dtDocumentFields` accordingly.&#xA;" CurrentIndex="[indexRow]" DisplayName="For Each currentDataRow" sap:VirtualizedContainerService.HintSize="570,1546.6666666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_7" Values="[dtDocumentFields.AsEnumerable().Where(Function(row) row.Field(Of Boolean)(&quot;If Mandatory&quot;) = True)]">
         <ui:ForEach.Body>
           <ActivityAction x:TypeArguments="sd:DataRow">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="sd:DataRow" Name="currentDataRow" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="536,1068" sap2010:WorkflowViewState.IdRef="Sequence_20">
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="536,1336.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_50">
               <Sequence.Variables>
                 <Variable x:TypeArguments="x:Boolean" Name="blnIfFieldExists" />
               </Sequence.Variables>
@@ -304,16 +319,17 @@
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Assign DisplayName="if mandatory field exists" sap:VirtualizedContainerService.HintSize="502,115" sap2010:WorkflowViewState.IdRef="Assign_13">
+              <Assign DisplayName="if mandatory field exists" sap:VirtualizedContainerService.HintSize="502,118" sap2010:WorkflowViewState.IdRef="Assign_40">
                 <Assign.To>
                   <OutArgument x:TypeArguments="x:Boolean">[blnIfFieldExists]</OutArgument>
                 </Assign.To>
                 <Assign.Value>
-                  <InArgument x:TypeArguments="x:Boolean" xml:space="preserve">[out_jsonObjectExtractionResults("Data")("General")(0).SelectToken("['"+currentDataRow("Field Name").ToString+"']") IsNot Nothing AndAlso 
-                  CBool(out_jsonObjectExtractionResults("Data")("General")(0)(currentDataRow("Field Name").ToString)("IsExtracted"))]</InArgument>
+                  <InArgument x:TypeArguments="x:Boolean" xml:space="preserve">[out_jsonObjectExtractionResults("Data")("Patient Data")(0).SelectToken("['"+currentDataRow("Field Name").ToString+"']") IsNot Nothing AndAlso 
+                  CBool(out_jsonObjectExtractionResults("Data")("Patient Data")(0)(currentDataRow("Field Name").ToString)("IsExtracted"))]</InArgument>
                 </Assign.Value>
               </Assign>
-              <Assign DisplayName="add to dt" sap:VirtualizedContainerService.HintSize="502,114" sap2010:WorkflowViewState.IdRef="Assign_12">
+              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="502,124" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[CInt(indexRow).ToString]" />
+              <Assign DisplayName="add to dt" sap:VirtualizedContainerService.HintSize="502,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_41">
                 <Assign.To>
                   <OutArgument x:TypeArguments="x:Object">[dtDocumentFields.Rows(indexRow)("If Extracted")]</OutArgument>
                 </Assign.To>
@@ -321,7 +337,7 @@
                   <InArgument x:TypeArguments="x:Object">[blnIfFieldExists]</InArgument>
                 </Assign.Value>
               </Assign>
-              <If Condition="[blnIfFieldExists]" DisplayName="if mandatory field exists" sap:VirtualizedContainerService.HintSize="502,779" sap2010:WorkflowViewState.IdRef="If_2">
+              <If Condition="[blnIfFieldExists]" DisplayName="if mandatory field exists" sap:VirtualizedContainerService.HintSize="502,917.3333333333334" sap2010:WorkflowViewState.IdRef="If_11">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -329,7 +345,7 @@
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
                 <If.Then>
-                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="468,394" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="468,527.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_51">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="x:String" Name="strExtractedValue" />
                     </Sequence.Variables>
@@ -339,24 +355,25 @@
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Assign DisplayName="get it's value" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_15">
+                    <Assign DisplayName="get it's value" sap:VirtualizedContainerService.HintSize="434,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_42">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:String">[strExtractedValue]</OutArgument>
                       </Assign.To>
                       <Assign.Value>
-                        <InArgument x:TypeArguments="x:String">[out_jsonObjectExtractionResults("Data")("General")(0)(currentDataRow("Field Name").ToString)("Value").ToString.ToUpper]</InArgument>
+                        <InArgument x:TypeArguments="x:String">[out_jsonObjectExtractionResults("Data")("Patient Data")(0)(currentDataRow("Field Name").ToString)("Value").ToString.ToUpper]</InArgument>
                       </Assign.Value>
                     </Assign>
-                    <Assign DisplayName="check if value is in scope" sap:VirtualizedContainerService.HintSize="434,115" sap2010:WorkflowViewState.IdRef="Assign_14">
+                    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="434,124" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[CInt(indexRow).ToString]" />
+                    <Assign DisplayName="check if value is in scope" sap:VirtualizedContainerService.HintSize="434,118" sap2010:WorkflowViewState.IdRef="Assign_43">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:Object">[dtDocumentFields.Rows(indexRow)("If Extracted value is In Scope")]</OutArgument>
                       </Assign.To>
                       <Assign.Value>
-                        <InArgument x:TypeArguments="x:Object" xml:space="preserve">[Not String.IsNullOrWhiteSpace(currentDataRow("In Scope Values").ToString) AndAlso
-currentDataRow("In Scope Values").ToString.Split(";"c).Select(Function(x) x.Trim).Contains(strExtractedValue.Trim)]</InArgument>
+                        <InArgument x:TypeArguments="x:Object" xml:space="preserve">[String.IsNullOrWhiteSpace(currentDataRow("In Scope Values").ToString) OrElse
+    currentDataRow("In Scope Values").ToString.Split(";"c).Contains(strExtractedValue)]</InArgument>
                       </Assign.Value>
                     </Assign>
-                    <Assign DisplayName="add value to dt" sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_16">
+                    <Assign DisplayName="add value to dt" sap:VirtualizedContainerService.HintSize="434,108" sap2010:WorkflowViewState.IdRef="Assign_44">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:Object">[dtDocumentFields.Rows(indexRow)("Extracted Value")]</OutArgument>
                       </Assign.To>
@@ -367,13 +384,13 @@ currentDataRow("In Scope Values").ToString.Split(";"c).Select(Function(x) x.Trim
                   </Sequence>
                 </If.Then>
                 <If.Else>
-                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,224" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_54">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,164" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[currentDataRow(&quot;Field Name&quot;).ToString+ &quot; field is not extracted&quot;]">
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_19" Message="[currentDataRow(&quot;Field Name&quot;).ToString+ &quot; field is not extracted&quot;]">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -389,188 +406,20 @@ currentDataRow("In Scope Values").ToString.Split(";"c).Select(Function(x) x.Trim
         </ui:ForEach.Body>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:ForEach>
-      <ui:ForEach x:TypeArguments="sd:DataRow" CurrentIndex="[indexRow]" DisplayName="For Each currentDataRow" sap:VirtualizedContainerService.HintSize="570,57" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[dtDocumentFields.AsEnumerable().Where(Function(row) row.Field(Of Boolean)(&quot;If Mandatory&quot;) = False)]">
-        <ui:ForEach.Body>
-          <ActivityAction x:TypeArguments="sd:DataRow">
-            <ActivityAction.Argument>
-              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="currentDataRow" />
-            </ActivityAction.Argument>
-            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="536,1182" sap2010:WorkflowViewState.IdRef="Sequence_38">
-              <Sequence.Variables>
-                <Variable x:TypeArguments="x:Boolean" Name="blnIfFieldExists" />
-              </Sequence.Variables>
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <Assign DisplayName="if mandatory field exists" sap:VirtualizedContainerService.HintSize="502,115" sap2010:WorkflowViewState.IdRef="Assign_24">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:Boolean">[blnIfFieldExists]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:Boolean" xml:space="preserve">[out_jsonObjectExtractionResults("Data")("General")(0).SelectToken("['"+currentDataRow("Field Name").ToString+"']") IsNot Nothing AndAlso 
-                  CBool(out_jsonObjectExtractionResults("Data")("General")(0)(currentDataRow("Field Name").ToString)("IsExtracted"))]</InArgument>
-                </Assign.Value>
-              </Assign>
-              <Assign DisplayName="add to dt" sap:VirtualizedContainerService.HintSize="502,114" sap2010:WorkflowViewState.IdRef="Assign_25">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="x:Object">[dtDocumentFields.Rows(indexRow)("If Extracted")]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="x:Object">[blnIfFieldExists]</InArgument>
-                </Assign.Value>
-              </Assign>
-              <If Condition="[blnIfFieldExists]" DisplayName="if mandatory field exists" sap:VirtualizedContainerService.HintSize="502,893" sap2010:WorkflowViewState.IdRef="If_7">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <If.Then>
-                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="468,394" sap2010:WorkflowViewState.IdRef="Sequence_39">
-                    <Sequence.Variables>
-                      <Variable x:TypeArguments="x:String" Name="strExtractedValue" />
-                    </Sequence.Variables>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <Assign DisplayName="get it's value" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_26">
-                      <Assign.To>
-                        <OutArgument x:TypeArguments="x:String">[strExtractedValue]</OutArgument>
-                      </Assign.To>
-                      <Assign.Value>
-                        <InArgument x:TypeArguments="x:String">[out_jsonObjectExtractionResults("Data")("General")(0)(currentDataRow("Field Name").ToString)("Value").ToString.ToUpper]</InArgument>
-                      </Assign.Value>
-                    </Assign>
-                    <Assign DisplayName="check if value is in scope" sap:VirtualizedContainerService.HintSize="434,115" sap2010:WorkflowViewState.IdRef="Assign_27">
-                      <Assign.To>
-                        <OutArgument x:TypeArguments="x:Object">[dtDocumentFields.Rows(indexRow)("If Extracted value is In Scope")]</OutArgument>
-                      </Assign.To>
-                      <Assign.Value>
-                        <InArgument x:TypeArguments="x:Object" xml:space="preserve">[Not String.IsNullOrWhiteSpace(currentDataRow("In Scope Values").ToString) AndAlso
-currentDataRow("In Scope Values").ToString.Split(";"c).Select(Function(x) x.Trim).Contains(strExtractedValue.Trim)]</InArgument>
-                      </Assign.Value>
-                    </Assign>
-                    <Assign DisplayName="add value to dt" sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_28">
-                      <Assign.To>
-                        <OutArgument x:TypeArguments="x:Object">[dtDocumentFields.Rows(indexRow)("Extracted Value")]</OutArgument>
-                      </Assign.To>
-                      <Assign.Value>
-                        <InArgument x:TypeArguments="x:Object">[strExtractedValue]</InArgument>
-                      </Assign.Value>
-                    </Assign>
-                  </Sequence>
-                </If.Then>
-                <If.Else>
-                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="468,338" sap2010:WorkflowViewState.IdRef="Sequence_40">
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <Assign DisplayName="counter for Either Or fields" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_30">
-                      <Assign.To>
-                        <OutArgument x:TypeArguments="x:Int32">[counterEitherOrFields]</OutArgument>
-                      </Assign.To>
-                      <Assign.Value>
-                        <InArgument x:TypeArguments="x:Int32">[counterEitherOrFields+1]</InArgument>
-                      </Assign.Value>
-                    </Assign>
-                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,164" sap2010:WorkflowViewState.IdRef="LogMessage_17" Message="[currentDataRow(&quot;Field Name&quot;).ToString+ &quot; field is not extracted&quot;]">
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                    </ui:LogMessage>
-                  </Sequence>
-                </If.Else>
-              </If>
-            </Sequence>
-          </ActivityAction>
-        </ui:ForEach.Body>
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </ui:ForEach>
-      <Sequence DisplayName="Either Or fields both empty" sap:VirtualizedContainerService.HintSize="570,57" sap2010:WorkflowViewState.IdRef="Sequence_41">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-        <If Condition="[counterEitherOrFields = 2]" sap:VirtualizedContainerService.HintSize="502,643" sap2010:WorkflowViewState.IdRef="If_8">
-          <If.Then>
-            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="468,393" sap2010:WorkflowViewState.IdRef="Sequence_42">
-              <Sequence.Variables>
-                <Variable x:TypeArguments="scg:List(x:String)" Name="listMissingMandatoryFields" />
-              </Sequence.Variables>
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-              <Assign DisplayName="convert array to list" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_31">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="scg:List(x:String)">[listMissingMandatoryFields]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="scg:List(x:String)">[arrMissingMandatoryFields.ToList]</InArgument>
-                </Assign.Value>
-              </Assign>
-              <Assign DisplayName="concat &quot;End of Service&quot;" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_32">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="scg:List(x:String)">[listMissingMandatoryFields]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="scg:List(x:String)">[If(listMissingMandatoryFields.Contains("End of service"), listMissingMandatoryFields, listMissingMandatoryFields.Concat({"End of service"}).ToList())]</InArgument>
-                </Assign.Value>
-              </Assign>
-              <Assign DisplayName="convert list to array" sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_33">
-                <Assign.To>
-                  <OutArgument x:TypeArguments="s:String[]">[arrMissingMandatoryFields]</OutArgument>
-                </Assign.To>
-                <Assign.Value>
-                  <InArgument x:TypeArguments="s:String[]">[listMissingMandatoryFields.ToArray()]</InArgument>
-                </Assign.Value>
-              </Assign>
-            </Sequence>
-          </If.Then>
-          <If.Else>
-            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Sequence_43">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </Sequence>
-          </If.Else>
-        </If>
-      </Sequence>
-      <Sequence DisplayName="MissingMandatory" sap:VirtualizedContainerService.HintSize="570,938" sap2010:WorkflowViewState.IdRef="Sequence_29">
+      <Sequence DisplayName="MissingMandatory" sap:VirtualizedContainerService.HintSize="570,832" sap2010:WorkflowViewState.IdRef="Sequence_52">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <Assign sap:VirtualizedContainerService.HintSize="450,115" sap2010:WorkflowViewState.IdRef="Assign_19">
+        <Assign sap:VirtualizedContainerService.HintSize="450,118" sap2010:WorkflowViewState.IdRef="Assign_45">
           <Assign.To>
             <OutArgument x:TypeArguments="s:String[]">[arrMissingMandatoryFields]</OutArgument>
           </Assign.To>
@@ -581,15 +430,15 @@ currentDataRow("In Scope Values").ToString.Split(";"c).Select(Function(x) x.Trim
     .Toarray()]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450,173" sap2010:WorkflowViewState.IdRef="LogMessage_10" Message="[&quot;The following mandatory fields were not extracted: &quot; &amp; String.Join(&quot;, &quot;, arrMissingMandatoryFields)]">
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450,57.333333333333336" sap2010:WorkflowViewState.IdRef="LogMessage_20" Message="[&quot;The following mandatory fields were not extracted: &quot; &amp; String.Join(&quot;, &quot;, arrMissingMandatoryFields)]">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
         </ui:LogMessage>
-        <If Condition="[arrMissingMandatoryFields.Length=0]" DisplayName="If no missing" sap:VirtualizedContainerService.HintSize="450,558" sap2010:WorkflowViewState.IdRef="If_3">
+        <If Condition="[arrMissingMandatoryFields.Length=0]" DisplayName="If no missing" sap:VirtualizedContainerService.HintSize="450,564.6666666666666" sap2010:WorkflowViewState.IdRef="If_12">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -597,35 +446,35 @@ currentDataRow("In Scope Values").ToString.Split(";"c).Select(Function(x) x.Trim
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <If.Then>
-            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,224" sap2010:WorkflowViewState.IdRef="Sequence_25">
+            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_55">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,164" sap2010:WorkflowViewState.IdRef="LogMessage_12" Message="[&quot;All mandatory fields were extracted&quot;]" />
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_21" Message="[&quot;All mandatory fields were extracted&quot;]" />
             </Sequence>
           </If.Then>
           <If.Else>
-            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,173" sap2010:WorkflowViewState.IdRef="Sequence_26">
+            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,174.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_56">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Throw Exception="[New BusinessRuleException(&quot;The following mandatory fields were not extracted: &quot; &amp; String.Join(&quot;, &quot;, arrMissingMandatoryFields))]" sap:VirtualizedContainerService.HintSize="382,113" sap2010:WorkflowViewState.IdRef="Throw_1" />
+              <Throw Exception="[New BusinessRuleException(&quot;The following mandatory fields were not extracted: &quot; &amp; String.Join(&quot;, &quot;, arrMissingMandatoryFields))]" sap:VirtualizedContainerService.HintSize="382,114.66666666666667" sap2010:WorkflowViewState.IdRef="Throw_5" />
             </Sequence>
           </If.Else>
         </If>
       </Sequence>
-      <Sequence DisplayName="Out Of Scope" sap:VirtualizedContainerService.HintSize="570,929" sap2010:WorkflowViewState.IdRef="Sequence_30">
+      <Sequence DisplayName="Out Of Scope" sap:VirtualizedContainerService.HintSize="570,942" sap2010:WorkflowViewState.IdRef="Sequence_53">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <Assign sap:VirtualizedContainerService.HintSize="450,115" sap2010:WorkflowViewState.IdRef="Assign_21">
+        <Assign sap:VirtualizedContainerService.HintSize="450,118" sap2010:WorkflowViewState.IdRef="Assign_46">
           <Assign.To>
             <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[arrOutOfScopeMandatoryFields]</OutArgument>
           </Assign.To>
@@ -635,26 +484,26 @@ currentDataRow("In Scope Values").ToString.Split(";"c).Select(Function(x) x.Trim
     .ToDictionary(Function(row) row("Field Name").ToString(), Function(row) row("Extracted Value").ToString())]</InArgument>
           </Assign.Value>
         </Assign>
-        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450,173" sap2010:WorkflowViewState.IdRef="LogMessage_14" Message="[&quot;The following mandatory fields have out of scope values: &quot; &amp; String.Join(&quot;, &quot;, arrOutOfScopeMandatoryFields)]" />
-        <If Condition="[arrOutOfScopeMandatoryFields.count=0]" DisplayName="If all in scope" sap:VirtualizedContainerService.HintSize="450,558" sap2010:WorkflowViewState.IdRef="If_5">
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_22" Message="[&quot;The following mandatory fields have out of scope values: &quot; &amp; String.Join(&quot;, &quot;, arrOutOfScopeMandatoryFields)]" />
+        <If Condition="[arrOutOfScopeMandatoryFields.count=0]" DisplayName="If all in scope" sap:VirtualizedContainerService.HintSize="450,564.6666666666666" sap2010:WorkflowViewState.IdRef="If_13">
           <If.Then>
-            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,224" sap2010:WorkflowViewState.IdRef="Sequence_31">
+            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_57">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,164" sap2010:WorkflowViewState.IdRef="LogMessage_15" Message="[&quot;All mandatory fields values are in scope&quot;]" />
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_23" Message="[&quot;All mandatory fields values are in scope&quot;]" />
             </Sequence>
           </If.Then>
           <If.Else>
-            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,173" sap2010:WorkflowViewState.IdRef="Sequence_32">
+            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,174.66666666666666" sap2010:WorkflowViewState.IdRef="Sequence_58">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <Throw Exception="[New BusinessRuleException(&quot;The following mandatory fields have out-of-scope values: &quot; &amp;&#xA;                    String.Join(&quot;, &quot;, arrOutOfScopeMandatoryFields.Select(Function(kvp) kvp.Key &amp; &quot; (Value: &quot; &amp; kvp.Value &amp; &quot;)&quot;)))]" sap:VirtualizedContainerService.HintSize="382,113" sap2010:WorkflowViewState.IdRef="Throw_3" />
+              <Throw Exception="[New BusinessRuleException(&quot;The following mandatory fields have out-of-scope values: &quot; &amp;&#xA;                    String.Join(&quot;, &quot;, arrOutOfScopeMandatoryFields.Select(Function(kvp) kvp.Key &amp; &quot; (Value: &quot; &amp; kvp.Value &amp; &quot;)&quot;)))]" sap:VirtualizedContainerService.HintSize="382,114.66666666666667" sap2010:WorkflowViewState.IdRef="Throw_6" />
             </Sequence>
           </If.Else>
         </If>

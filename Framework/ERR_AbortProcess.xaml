@@ -109,25 +109,27 @@
       <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Workflow executes when the process is aborted due to an exception.&#xA;&#xA;Any error cleanup should be done here.&#xA;&#xA;NOTE: By default, all exceptions are treated the same. " DisplayName="ERR_AbortProcess" sap:VirtualizedContainerService.HintSize="898.6666666666666,2094.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Workflow executes when the process is aborted due to an exception.&#xA;&#xA;Any error cleanup should be done here.&#xA;&#xA;NOTE: By default, all exceptions are treated the same. " DisplayName="ERR_AbortProcess" sap:VirtualizedContainerService.HintSize="898.6666666666666,3138" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message - Abort Process" sap:VirtualizedContainerService.HintSize="604,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[String.Format(in_Config(&quot;ErrorMessage_ProcessAborted&quot;).ToString, in_Exception.GetType.Name, in_Exception.Message + Environment.NewLine, in_Exception.ToString + Environment.NewLine + in_Config(&quot;logKey&quot;).ToString)]" />
-    <If Condition="[in_strTargetFile IsNot Nothing AndAlso not string.IsNullOrWhiteSpace(in_strTargetFile) AndAlso path.Exists(in_strTargetFile)]" DisplayName="If Target File path is known - then try to move it to failed folder" sap:VirtualizedContainerService.HintSize="604,1816.6666666666667" sap2010:WorkflowViewState.IdRef="If_2">
+    <ui:LogMessage DisplayName="Log Message - Abort Process" sap:VirtualizedContainerService.HintSize="654,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[String.Format(in_Config(&quot;ErrorMessage_ProcessAborted&quot;).ToString, in_Exception.GetType.Name, in_Exception.Message + Environment.NewLine, in_Exception.ToString + Environment.NewLine + in_Config(&quot;logKey&quot;).ToString)]" />
+    <If Condition="[in_strTargetFile IsNot Nothing AndAlso not string.IsNullOrWhiteSpace(in_strTargetFile) AndAlso path.Exists(in_strTargetFile)]" DisplayName="If Target File path is known - then try to move it to failed folder" sap:VirtualizedContainerService.HintSize="654,2860" sap2010:WorkflowViewState.IdRef="If_2">
       <If.Then>
-        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="570,1426.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="620,2470" sap2010:WorkflowViewState.IdRef="Sequence_5">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Move to failed folder" sap:VirtualizedContainerService.HintSize="536,1366.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Move to failed folder" sap:VirtualizedContainerService.HintSize="586,2410" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="strGeneralFolderPath" />
+              <Variable x:TypeArguments="x:String" Name="strfacilityName" />
+              <Variable x:TypeArguments="x:String" Name="strToReviewFolderName" />
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -135,23 +137,49 @@
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Assign sap:VirtualizedContainerService.HintSize="502,118" sap2010:WorkflowViewState.IdRef="Assign_6">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[strGeneralFolderPath]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String" xml:space="preserve">[If ((in_Config IsNot Nothing AndAlso in_Config.ContainsKey("AutomationGeneralFolderPath") AndAlso in_Config("AutomationGeneralFolderPath") IsNot Nothing),
+            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="552,210.66666666666666" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+              <ui:MultipleAssign.AssignOperations>
+                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strGeneralFolderPath]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String" xml:space="preserve">[If ((in_Config IsNot Nothing AndAlso in_Config.ContainsKey("AutomationGeneralFolderPath") AndAlso in_Config("AutomationGeneralFolderPath") IsNot Nothing),
 	in_Config("AutomationGeneralFolderPath").ToString,
 	Nothing)]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <If Condition="[strGeneralFolderPath IsNot Nothing]" DisplayName="If folder path retrived from config" sap:VirtualizedContainerService.HintSize="502,1166" sap2010:WorkflowViewState.IdRef="If_1">
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strfacilityName]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String" xml:space="preserve">[If(in_transactionItem.SpecificContent.ContainsKey("Facility Short Name") AndAlso
+   Not String.IsNullOrWhiteSpace(in_transactionItem.SpecificContent("Facility Short Name").ToString),
+   in_transactionItem.SpecificContent("Facility Short Name").ToString,
+   "")]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[strToReviewFolderName]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[in_Config("ToReviewItemsFolderName").ToString]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                </scg:List>
+              </ui:MultipleAssign.AssignOperations>
+            </ui:MultipleAssign>
+            <If Condition="[strGeneralFolderPath IsNot Nothing]" DisplayName="If folder path retrived from config" sap:VirtualizedContainerService.HintSize="552,2116.6666666666665" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
-                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="468,776" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="518,1726.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="x:String" Name="strFailedItemsFolderFullPath" />
                     <Variable x:TypeArguments="x:String" Name="strFileName" />
                     <Variable x:TypeArguments="x:String" Name="strNewFilePath" />
+                    <Variable x:TypeArguments="x:String" Name="strBusinessReviewFacilityFolder" />
                   </Sequence.Variables>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -159,15 +187,54 @@
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Assign sap:VirtualizedContainerService.HintSize="434,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_2">
+                  <Assign sap:VirtualizedContainerService.HintSize="484,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_2">
                     <Assign.To>
                       <OutArgument x:TypeArguments="x:String">[strFailedItemsFolderFullPath]</OutArgument>
                     </Assign.To>
                     <Assign.Value>
-                      <InArgument x:TypeArguments="x:String">[path.Combine(strGeneralFolderPath,in_Config("ToReviewItemsFolderName").ToString)]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[path.Combine(strGeneralFolderPath,strToReviewFolderName)]</InArgument>
                     </Assign.Value>
                   </Assign>
-                  <Assign sap:VirtualizedContainerService.HintSize="434,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_3">
+                  <Assign sap:VirtualizedContainerService.HintSize="484,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_8">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[strBusinessReviewFacilityFolder]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[path.Combine(strFailedItemsFolderFullPath,"Bot "+strfacilityName)]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Sequence DisplayName="Create Folder if needed" sap:VirtualizedContainerService.HintSize="484,833.3333333333334" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If Condition="[Directory.Exists(strBusinessReviewFacilityFolder)]" sap:VirtualizedContainerService.HintSize="450,741.3333333333334" sap2010:WorkflowViewState.IdRef="If_3">
+                      <If.Then>
+                        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,227.33333333333334" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;To Review Folder already Exists &quot;+strBusinessReviewFacilityFolder]" />
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,351.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="382,124" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[strBusinessReviewFacilityFolder]" />
+                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[&quot;To Review Folder already Exists &quot;+strBusinessReviewFacilityFolder]" />
+                        </Sequence>
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                  <Assign sap:VirtualizedContainerService.HintSize="484,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_3">
                     <Assign.To>
                       <OutArgument x:TypeArguments="x:String">[strFileName]</OutArgument>
                     </Assign.To>
@@ -175,16 +242,16 @@
                       <InArgument x:TypeArguments="x:String">[path.GetFileName(in_strTargetFile)]</InArgument>
                     </Assign.Value>
                   </Assign>
-                  <Assign sap:VirtualizedContainerService.HintSize="434,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_5">
+                  <Assign sap:VirtualizedContainerService.HintSize="484,117.33333333333333" sap2010:WorkflowViewState.IdRef="Assign_7">
                     <Assign.To>
                       <OutArgument x:TypeArguments="x:String">[strNewFilePath]</OutArgument>
                     </Assign.To>
                     <Assign.Value>
-                      <InArgument x:TypeArguments="x:String">[path.Combine(strFailedItemsFolderFullPath,strFileName)]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[path.Combine(strBusinessReviewFacilityFolder,strFileName)]</InArgument>
                     </Assign.Value>
                   </Assign>
-                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;Failed item new file path: &quot;+strNewFilePath]" />
-                  <ui:MoveFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" Destination="[strNewFilePath]" DisplayName="Move File" sap:VirtualizedContainerService.HintSize="434,187.33333333333334" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="True" Path="[in_strTargetFile]" />
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="484,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;Failed item new file path: &quot;+strNewFilePath]" />
+                  <ui:MoveFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" Destination="[strNewFilePath]" DisplayName="Move File" sap:VirtualizedContainerService.HintSize="484,187.33333333333334" sap2010:WorkflowViewState.IdRef="MoveFile_1" Overwrite="True" Path="[in_strTargetFile]" />
                 </Sequence>
               </If.Then>
               <If.Else>

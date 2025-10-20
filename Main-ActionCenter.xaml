@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.str_Config_Path="\\firework\data\Automation\staff\Revenue Cycle\UM Auth Entry\Config\Config.xlsx" this:Main.IfUseQueue="True" this:Main.IfSkipHumanValidationAlways="False" this:Main.MasterLogFilePath="\\firework\data\Automation\staff\Revenue Cycle\UM Auth Entry\Output\MasterLogFile" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uisad="clr-namespace:UiPath.IntelligentOCR.StudioWeb.Activities.DataExtraction;assembly=UiPath.IntelligentOCR.StudioWeb.Activities" xmlns:uisad1="clr-namespace:UiPath.IntelligentOCR.StudioWeb.Activities.DataValidation;assembly=UiPath.IntelligentOCR.StudioWeb.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.str_Config_Path="\\firework\data\Automation\staff\Revenue Cycle\UM Auth Entry Patient Data Extraction\Config\Config.xlsx" this:Main.IfUseQueue="True" this:Main.IfSkipHumanValidationAlways="False" this:Main.MasterLogFilePath="\\firework\data\Automation\staff\Revenue Cycle\UM Auth Entry\Output\MasterLogFile" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uisad="clr-namespace:UiPath.IntelligentOCR.StudioWeb.Activities.DataExtraction;assembly=UiPath.IntelligentOCR.StudioWeb.Activities" xmlns:uisad1="clr-namespace:UiPath.IntelligentOCR.StudioWeb.Activities.DataValidation;assembly=UiPath.IntelligentOCR.StudioWeb.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="str_Config_Path" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Variable that checks if the Document Understanding Process is using Orchestrator Queues or not." Name="IfUseQueue" Type="InArgument(x:Boolean)" />
@@ -136,7 +136,7 @@
       <AssemblyReference>UM_Auth_PatientExtraction.Core</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="UM_Auth_Patient Extraction&#xA;Extract info from the authorization document and move to the new directory. For Authorizations - create a new queue item&#xA;&#xA;&#xA;- Uses IXP model for data extraction. &#xA;- Creates am Action Acenter task for humam if extraction confidence is low&#xA;- Uses Clarity DB query to get patient info (MHD number)&#xA;- Uses few C# coded workflows for data manipulation&#xA;- All extraction results are saved into MasterLogFile.csv" DisplayName="Main Sequence - Action Center" sap:VirtualizedContainerService.HintSize="898.6666666666666,1350" sap2010:WorkflowViewState.IdRef="Sequence_9">
+  <Sequence sap2010:Annotation.AnnotationText="UM_Auth_Patient Extraction&#xA;Extract info from the authorization document and move to the new directory. For Authorizations - create a new queue item&#xA;&#xA;&#xA;- Uses IXP model for data extraction. &#xA;- Creates am Action Acenter task for humam if extraction confidence is low&#xA;- Uses Clarity DB query to get patient info (MHD number)&#xA;- Uses few C# coded workflows for data manipulation&#xA;- All extraction results are saved into MasterLogFile.csv" DisplayName="Main Sequence - Action Center" sap:VirtualizedContainerService.HintSize="760.6666666666666,1211.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_9">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="config" />
       <Variable x:TypeArguments="x:Int32" sap2010:Annotation.AnnotationText="Used to control the number of attempts of retrying in case of a system exception." Name="maxAttempts" />
@@ -153,7 +153,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Read the config file first; all Log &amp; Exception messages are defined there" DisplayName="ReadConfigFile" sap:VirtualizedContainerService.HintSize="512.6666666666666,222.66666666666666" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_65" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="Framework\00_ReadConfigFile.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Read the config file first; all Log &amp; Exception messages are defined there" DisplayName="ReadConfigFile" sap:VirtualizedContainerService.HintSize="638.6666666666666,222.66666666666666" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_65" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="Framework\00_ReadConfigFile.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_ConfigFile">[str_Config_Path]</InArgument>
         <InArgument x:TypeArguments="s:String[]" x:Key="in_ConfigSheets">[{"Settings", "Constants"}]</InArgument>
@@ -170,7 +170,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <TryCatch DisplayName="Try Catch - Process File" sap:VirtualizedContainerService.HintSize="512.6666666666666,1026" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+    <TryCatch DisplayName="Try Catch - Process File" sap:VirtualizedContainerService.HintSize="638.6666666666666,887.3333333333334" sap2010:WorkflowViewState.IdRef="TryCatch_3">
       <TryCatch.Try>
         <Flowchart DisplayName="File Processing Flowchart" sap:VirtualizedContainerService.HintSize="600,625.3333333333334" sap2010:WorkflowViewState.IdRef="Flowchart_10">
           <sap:WorkflowViewStateService.ViewState>
@@ -413,14 +413,14 @@
                                   <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <Sequence DisplayName="Create Validation Task and Resume" sap:VirtualizedContainerService.HintSize="484,1470" sap2010:WorkflowViewState.IdRef="Sequence_70">
+                              <Sequence DisplayName="Create Validation Task and Resume" sap:VirtualizedContainerService.HintSize="484,1491.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_70">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <ui:LogMessage DisplayName="Log Message -  Create HitL Validation Action" sap:VirtualizedContainerService.HintSize="450,173" sap2010:WorkflowViewState.IdRef="LogMessage_88" Message="[config(&quot;LogMessage_CreateValidationAction&quot;).ToString + &quot; &quot; +Path.GetFileNameWithoutExtension(strTargetFile) +  Environment.NewLine + config(&quot;TargetFileKey&quot;).ToString]">
+                                <ui:LogMessage DisplayName="Log Message -  Create HitL Validation Action" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_88" Message="[config(&quot;LogMessage_CreateValidationAction&quot;).ToString + &quot; &quot; +Path.GetFileNameWithoutExtension(strTargetFile) +  Environment.NewLine + config(&quot;TargetFileKey&quot;).ToString]">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -428,7 +428,7 @@
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
                                 </ui:LogMessage>
-                                <uisad1:CreateValidationAction x:TypeArguments="uisad:DictionaryData" BucketId="{x:Null}" BucketName="{x:Null}" ContainsDocument="{x:Null}" ContainsTaxonomy="{x:Null}" FieldsValidationConfidence="{x:Null}" OrchestratorFolderId="{x:Null}" OriginalFilePath="{x:Null}" ActionCatalogue="[config(&quot;ActionCatalog&quot;).ToString]" ActionPriority="Medium" ActionTitle="[config(&quot;ValidationActionTitle&quot;).ToString + &quot; &quot; + Path.GetFileNameWithoutExtension(strTargetFile)]" sap2010:Annotation.AnnotationText="" AutomaticExtractionResults="[extractionResults]" CreatedValidationAction="[CreatedValidationAction]" DisplayName="Create Validation Task" sap:VirtualizedContainerService.HintSize="450,206" sap2010:WorkflowViewState.IdRef="CreateValidationAction`1_1" OrchestratorBucketName="[config(&quot;StorageBucketName&quot;).ToString]" OrchestratorFolderName="[config(&quot;ActionFolderPath&quot;).ToString]">
+                                <uisad1:CreateValidationAction x:TypeArguments="uisad:DictionaryData" BucketId="{x:Null}" BucketName="{x:Null}" ContainsDocument="{x:Null}" ContainsTaxonomy="{x:Null}" FieldsValidationConfidence="{x:Null}" OrchestratorFolderId="{x:Null}" OriginalFilePath="{x:Null}" ActionCatalogue="[config(&quot;ActionCatalog&quot;).ToString]" ActionPriority="Medium" ActionTitle="[config(&quot;ValidationActionTitle&quot;).ToString + &quot; &quot; + Path.GetFileNameWithoutExtension(strTargetFile)]" sap2010:Annotation.AnnotationText="" AutomaticExtractionResults="[extractionResults]" CreatedValidationAction="[CreatedValidationAction]" DisplayName="Create Validation Task" sap:VirtualizedContainerService.HintSize="450,207.33333333333334" sap2010:WorkflowViewState.IdRef="CreateValidationAction`1_1" OrchestratorBucketName="[config(&quot;StorageBucketName&quot;).ToString]" OrchestratorFolderName="[config(&quot;ActionFolderPath&quot;).ToString]">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -437,7 +437,7 @@
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
                                 </uisad1:CreateValidationAction>
-                                <If Condition="[TransactionItem IsNot Nothing]" DisplayName="If Valid Transaction Item - Set Data Validation Status" sap:VirtualizedContainerService.HintSize="450,426" sap2010:WorkflowViewState.IdRef="If_7">
+                                <If Condition="[TransactionItem IsNot Nothing]" DisplayName="If Valid Transaction Item - Set Data Validation Status" sap:VirtualizedContainerService.HintSize="450,430" sap2010:WorkflowViewState.IdRef="If_7">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -445,7 +445,7 @@
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
                                   <If.Then>
-                                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SetTransactionProgress - Extraction Validation" sap:VirtualizedContainerService.HintSize="334,145" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_94" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="Framework\ReusableWorkflows\SetTransactionProgress.xaml">
+                                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SetTransactionProgress - Extraction Validation" sap:VirtualizedContainerService.HintSize="341.3333333333333,145.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_94" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="Framework\ReusableWorkflows\SetTransactionProgress.xaml">
                                       <ui:InvokeWorkflowFile.Arguments>
                                         <InArgument x:TypeArguments="x:String" x:Key="in_Progress">[config("TransactionProgress_ExtractionValidation").ToString]</InArgument>
                                         <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">[TransactionItem]</InArgument>
@@ -456,7 +456,7 @@
                                     </ui:InvokeWorkflowFile>
                                   </If.Then>
                                   <If.Else>
-                                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Sequence_64">
+                                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_64">
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -465,7 +465,7 @@
                                     </Sequence>
                                   </If.Else>
                                 </If>
-                                <ui:LogMessage DisplayName="Log Message - Wait On HitL Validation Action" sap:VirtualizedContainerService.HintSize="450,173" sap2010:WorkflowViewState.IdRef="LogMessage_91" Message="[config(&quot;LogMessage_WaitOnValidationAction&quot;).ToString + CreatedValidationAction.ActionData.Id.ToString + Environment.NewLine + config(&quot;logKey&quot;).ToString]">
+                                <ui:LogMessage DisplayName="Log Message - Wait On HitL Validation Action" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_91" Message="[config(&quot;LogMessage_WaitOnValidationAction&quot;).ToString + CreatedValidationAction.ActionData.Id.ToString + Environment.NewLine + config(&quot;logKey&quot;).ToString]">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -473,8 +473,8 @@
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
                                 </ui:LogMessage>
-                                <uisad1:WaitForValidationAction x:TypeArguments="uisad:DictionaryData" RemoveDataAfterProcessing="{x:Null}" WaitItemDataObject="{x:Null}" CreatedValidationAction="[CreatedValidationAction]" DisplayName="Wait for Validation Task and Resume" sap:VirtualizedContainerService.HintSize="450,122" sap2010:WorkflowViewState.IdRef="WaitForValidationAction`1_1" ValidatedExtractionResults="[validatedExtractionResults]" />
-                                <ui:LogMessage DisplayName="Log Message - DataValidation Resume" sap:VirtualizedContainerService.HintSize="450,173" sap2010:WorkflowViewState.IdRef="LogMessage_92" Message="[String.Format(config(&quot;LogMessage_ResumeAfterDataValidation&quot;).ToString, &quot; &quot; + &quot;action #&quot; + CreatedValidationAction.ActionData.Id.ToString, Path.GetFileNameWithoutExtension(strTargetFile) +  Environment.NewLine + config(&quot;logKey&quot;).ToString)]">
+                                <uisad1:WaitForValidationAction x:TypeArguments="uisad:DictionaryData" RemoveDataAfterProcessing="{x:Null}" WaitItemDataObject="{x:Null}" CreatedValidationAction="[CreatedValidationAction]" DisplayName="Wait for Validation Task and Resume" sap:VirtualizedContainerService.HintSize="450,124" sap2010:WorkflowViewState.IdRef="WaitForValidationAction`1_1" ValidatedExtractionResults="[validatedExtractionResults]" />
+                                <ui:LogMessage DisplayName="Log Message - DataValidation Resume" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_92" Message="[String.Format(config(&quot;LogMessage_ResumeAfterDataValidation&quot;).ToString, &quot; &quot; + &quot;action #&quot; + CreatedValidationAction.ActionData.Id.ToString, Path.GetFileNameWithoutExtension(strTargetFile) +  Environment.NewLine + config(&quot;logKey&quot;).ToString)]">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -482,7 +482,7 @@
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
                                 </ui:LogMessage>
-                                <Assign DisplayName="Assign Extraction Result" sap:VirtualizedContainerService.HintSize="450,105" sap2010:WorkflowViewState.IdRef="Assign_26">
+                                <Assign DisplayName="Assign Extraction Result" sap:VirtualizedContainerService.HintSize="450,108" sap2010:WorkflowViewState.IdRef="Assign_26">
                                   <Assign.To>
                                     <OutArgument x:TypeArguments="uisad:IDocumentData(uisad:DictionaryData)">[extractionResults]</OutArgument>
                                   </Assign.To>
@@ -491,7 +491,7 @@
                                   </Assign.Value>
                                 </Assign>
                               </Sequence>
-                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="FormatExtractionResults - Invoke Workflow File (FormatExtractionResults.xaml)" sap:VirtualizedContainerService.HintSize="484,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_101" UnSafe="False" WorkflowFileName="IDP logic\FormatExtractionResults.xaml">
+                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="FormatExtractionResults - Invoke Workflow File (FormatExtractionResults.xaml)" sap:VirtualizedContainerService.HintSize="484,177.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_101" UnSafe="False" WorkflowFileName="IDP logic\FormatExtractionResults.xaml">
                                 <ui:InvokeWorkflowFile.Arguments>
                                   <OutArgument x:TypeArguments="x:String" x:Key="out_strJsonFormattedExtractionResults">[strJsonFormattedExtractionResults]</OutArgument>
                                   <InArgument x:TypeArguments="uisad:IDocumentData(uisad:DictionaryData)" x:Key="in_idocExtractionResults">[extractionResults]</InArgument>
@@ -610,10 +610,10 @@
         </Flowchart>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="478.6666666666667,831.3333333333334" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="604.6666666666666,23.333333333333332" sap2010:WorkflowViewState.IdRef="Catch`1_3">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
