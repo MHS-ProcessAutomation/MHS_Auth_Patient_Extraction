@@ -5,7 +5,6 @@
     <x:Property sap2010:Annotation.AnnotationText="Used to control the number of attempts of retrying in case of a system exception." Name="in_MaxAttempts" Type="InArgument(x:Int32)" />
     <x:Property sap2010:Annotation.AnnotationText="Used to control the amount of time between retries in the Retry Scope activity." Name="in_RetryInterval" Type="InArgument(x:TimeSpan)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="io_Config" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property sap2010:Annotation.AnnotationText="Dictionary that will contain document-related values, such as extracted results, and other related data" Name="out_dictDocData" Type="OutArgument(scg:Dictionary(x:String, x:String))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -111,7 +110,7 @@
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Workflow loads the Taxonomy and updates the Config Dictionary with Asset values fetched from Orchestrator." DisplayName="InitializeProcess" sap:VirtualizedContainerService.HintSize="898.6666666666666,1919.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Workflow loads the Taxonomy and updates the Config Dictionary with Asset values fetched from Orchestrator." DisplayName="InitializeProcess" sap:VirtualizedContainerService.HintSize="890.6666666666666,1919.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -192,7 +191,7 @@
                               <ActivityAction.Argument>
                                 <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                               </ActivityAction.Argument>
-                              <If Condition="[not io_Config.Keys.Contains(row(&quot;Name&quot;).ToString)]" DisplayName="If - Check if Missing Setting" sap:VirtualizedContainerService.HintSize="450,582" sap2010:WorkflowViewState.IdRef="If_3">
+                              <If Condition="[not io_Config.Keys.Contains(row(&quot;Name&quot;).ToString)]" DisplayName="If - Check if Missing Setting" sap:VirtualizedContainerService.HintSize="334,153.33333333333334" sap2010:WorkflowViewState.IdRef="If_3">
                                 <If.Then>
                                   <Sequence DisplayName="Asset Failed to Load Sequence" sap:VirtualizedContainerService.HintSize="416,351.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_7">
                                     <sap:WorkflowViewStateService.ViewState>

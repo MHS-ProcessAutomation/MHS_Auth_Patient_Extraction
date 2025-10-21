@@ -4,14 +4,11 @@
   "description": "",
   "main": "Main-ActionCenter.xaml",
   "dependencies": {
-    "ConnectToEpicDatabase": "[1.0.2]",
     "UiPath.DocumentUnderstanding.Activities": "[2.14.0]",
-    "UiPath.DocumentUnderstanding.ML.Activities": "[1.35.0]",
     "UiPath.Excel.Activities": "[2.24.3]",
     "UiPath.System.Activities": "[25.10.0]",
     "UiPath.Testing.Activities": "[24.10.3]",
     "UiPath.UIAutomation.Activities": "[24.10.7]",
-    "UiPath.Vision": "[3.16.0]",
     "UiPath.WebAPI.Activities": "[1.21.1]"
   },
   "webServices": [],

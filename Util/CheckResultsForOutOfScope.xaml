@@ -370,7 +370,7 @@
                       </Assign.To>
                       <Assign.Value>
                         <InArgument x:TypeArguments="x:Object" xml:space="preserve">[String.IsNullOrWhiteSpace(currentDataRow("In Scope Values").ToString) OrElse
-    currentDataRow("In Scope Values").ToString.Split(";"c).Contains(strExtractedValue)]</InArgument>
+    currentDataRow("In Scope Values").ToString.Split(";"c).Contains(strExtractedValue.ToLower.Trim)]</InArgument>
                       </Assign.Value>
                     </Assign>
                     <Assign DisplayName="add value to dt" sap:VirtualizedContainerService.HintSize="434,108" sap2010:WorkflowViewState.IdRef="Assign_44">

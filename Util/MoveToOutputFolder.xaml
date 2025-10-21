@@ -114,7 +114,7 @@
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="898.6666666666666,3667.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_9">
+  <Sequence sap:VirtualizedContainerService.HintSize="890.6666666666666,3658" sap2010:WorkflowViewState.IdRef="Sequence_9">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strNewFilePath" />
     </Sequence.Variables>
@@ -123,7 +123,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Move to one of the folders" sap:VirtualizedContainerService.HintSize="546.6666666666666,3644.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_7">
+    <Sequence DisplayName="Move to one of the folders" sap:VirtualizedContainerService.HintSize="546.6666666666666,3635.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_7">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:String" Name="strOutputFilePath" />
         <Variable x:TypeArguments="x:String" Name="strOriginalFileName" />
@@ -194,7 +194,7 @@
           <InArgument x:TypeArguments="x:String">[System.IO.Path.GetFileNameWithoutExtension(io_dictDocData("New File Path"))]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="512.6666666666666,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;strOriginalFileName: &quot;+strOriginalFileName]" />
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;strOriginalFileName: &quot;+strOriginalFileName]" />
       <If Condition="[strOutputFilePath.Length &lt;= 260 AndAlso &#xA;strOutputFilePath.IndexOfAny(System.IO.Path.GetInvalidPathChars()) = -1 AndAlso &#xA;Not strOutputFilePath.Split(&quot;\&quot;c).Any(Function(p) p.Length &gt; 255)]" DisplayName="If new name ok with windows" sap:VirtualizedContainerService.HintSize="512.6666666666666,920.6666666666666" sap2010:WorkflowViewState.IdRef="If_2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
