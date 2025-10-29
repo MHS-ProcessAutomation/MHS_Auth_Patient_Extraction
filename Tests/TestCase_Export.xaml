@@ -124,7 +124,7 @@
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="TestCase_Template" sap:VirtualizedContainerService.HintSize="841,1449" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="TestCase_Template" sap:VirtualizedContainerService.HintSize="1532,1272" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="Success" Name="strResult" />
       <Variable x:TypeArguments="x:String" Name="strExceptionMessage">
@@ -154,7 +154,6 @@
           <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="out_Config">[in_Config]</OutArgument>
           <OutArgument x:TypeArguments="x:Int32" x:Key="out_MaxAttempts" />
           <OutArgument x:TypeArguments="x:TimeSpan" x:Key="out_RetryInterval" />
-          <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="out_dictDocData" />
         </ui:InvokeWorkflowFile.Arguments>
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -166,13 +165,13 @@
       </ui:InvokeWorkflowFile>
       <ui:ReadTextFile FileName="{x:Null}" Content="[in_strJsonFromattedResults]" DisplayName="Read Text File" File="[LocalResource.FromPath(&quot;Tests\\dummy formatted results.json&quot;)]" sap:VirtualizedContainerService.HintSize="416,115" sap2010:WorkflowViewState.IdRef="ReadTextFile_2" />
     </Sequence>
-    <Sequence DisplayName="... When" sap:VirtualizedContainerService.HintSize="540,804" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence DisplayName="... When" sap:VirtualizedContainerService.HintSize="540,627" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <TryCatch DisplayName="Try Catch testing steps" sap:VirtualizedContainerService.HintSize="506,712" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch DisplayName="Try Catch testing steps" sap:VirtualizedContainerService.HintSize="506,535" sap2010:WorkflowViewState.IdRef="TryCatch_1">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -180,30 +179,13 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <TryCatch.Try>
-          <Sequence DisplayName="Testing steps" sap:VirtualizedContainerService.HintSize="468,461" sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <Sequence DisplayName="Testing steps" sap:VirtualizedContainerService.HintSize="468,284" sap2010:WorkflowViewState.IdRef="Sequence_5">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <ui:Comment sap:VirtualizedContainerService.HintSize="434,88" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Main steps to test" />
-            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Export - Invoke Workflow File (Export.xaml)" sap:VirtualizedContainerService.HintSize="434,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Export.xaml">
-              <ui:InvokeWorkflowFile.Arguments>
-                <InArgument x:TypeArguments="x:String" x:Key="in_strMasterLogFilePath" xml:space="preserve">[path.Combine(  Environment.CurrentDirectory, "Tests", "testMasterLog.csv")]</InArgument>
-                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="in_dictDocData" xml:space="preserve">[New Dictionary(Of String, String) From {
-            {"Extraction Success Flag", True.ToString},
-            {"File Path", "C:\Temp\OriginalFile.txt"},
-            {"New File Path", "C:\Temp\NewFile.txt"},
-            {"File Name", "OriginalFile.txt"},
-            {"New File Name", "NewFile.txt"},
-            {"Facility Short Name", "MCMC"},
-            {"Vendor Short Name", "AETNA"},
-            {"Document Type File Name", "Invoice"}
-        }]</InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="in_strJsonFromattedResults">[in_strJsonFromattedResults]</InArgument>
-                <InArgument x:TypeArguments="s:String[]" x:Key="in_arrMasterLogColumnsNames">[in_Config("MasterLogColumnsNames").ToString.Split(";"c).toarray]</InArgument>
-              </ui:InvokeWorkflowFile.Arguments>
-            </ui:InvokeWorkflowFile>
             <Assign sap2010:Annotation.AnnotationText="Edit this to save actual output of the wf" DisplayName="Assign strActualOutput" sap:VirtualizedContainerService.HintSize="434,136" sap2010:WorkflowViewState.IdRef="Assign_1">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:String">[strActualOutput]</OutArgument>

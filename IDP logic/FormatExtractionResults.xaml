@@ -1,9 +1,10 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="USeCS" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uisad="clr-namespace:UiPath.IntelligentOCR.StudioWeb.Activities.DataExtraction;assembly=UiPath.IntelligentOCR.StudioWeb.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="USeCS" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uisad="clr-namespace:UiPath.IntelligentOCR.StudioWeb.Activities.DataExtraction;assembly=UiPath.IntelligentOCR.StudioWeb.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="out_strJsonFormattedExtractionResults" Type="OutArgument(x:String)" />
     <x:Property Name="in_idocExtractionResults" Type="InArgument(uisad:IDocumentData(uisad:DictionaryData))" />
     <x:Property Name="in_strExtractionResultsFolderPath" Type="InArgument(x:String)" />
     <x:Property Name="in_blnIfAfterHumanValidation" Type="InArgument(x:Boolean)" />
+    <x:Property Name="out_strRegexAuthNumber" Type="OutArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -113,16 +114,17 @@
       <AssemblyReference>UM_Auth_PatientExtraction.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="USeCS" sap:VirtualizedContainerService.HintSize="900,811" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="USeCS" sap:VirtualizedContainerService.HintSize="1516,1508" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="strJsonRawExtractionResults" />
+      <Variable x:TypeArguments="x:String" Name="flattenedJsonText" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign DisplayName="Convert to json" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_5">
+    <Assign DisplayName="Convert to json" sap:VirtualizedContainerService.HintSize="468,113" sap2010:WorkflowViewState.IdRef="Assign_5">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[strJsonRawExtractionResults]</OutArgument>
       </Assign.To>
@@ -130,7 +132,38 @@
         <InArgument x:TypeArguments="x:String">[Newtonsoft.Json.JsonConvert.SerializeObject(in_idocExtractionResults)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="WriteExtrResults - Invoke Workflow File (WriteExtrResults.xaml)" sap:VirtualizedContainerService.HintSize="434,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Util\WriteExtrResults.xaml">
+    <Sequence DisplayName="Regex Authorization Number" sap:VirtualizedContainerService.HintSize="468,698" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="njl:JObject" Name="strJsonObj" />
+        <Variable x:TypeArguments="x:String" Name="strRawTextJsonObject" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:DeserializeJson x:TypeArguments="njl:JObject" JsonSample="{x:Null}" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="434,122" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_3" JsonObject="[strJsonObj]" JsonString="[strJsonRawExtractionResults]" />
+      <Assign DisplayName="Raw text string" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_8">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[strRawTextJsonObject]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[strJsonObj("DocumentMetadata")("Text").ToString]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:Matches DisplayName="Find Matching Patterns" FirstMatch="[out_strRegexAuthNumber]" sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="Matches_1" Input="[strRawTextJsonObject]" IsBuilderTabModified="False" Pattern="(?i)(?:Reference\s*#\s*:|Authorization\s*#\s*:|Authorization\s*Number\s*:)\s*(IP\d+|A\d+|PUM\d+|\d+)" RegexOption="Compiled" />
+      <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_9">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[out_strRegexAuthNumber]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(out_strRegexAuthNumber,"(IP\d+|A\d+|PUM\d+|\d+)").Value.Trim()]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,164" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;Regex authorization number is &quot;+out_strRegexAuthNumber]" />
+    </Sequence>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="WriteExtrResults - Invoke Workflow File (WriteExtrResults.xaml)" sap:VirtualizedContainerService.HintSize="468,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Tests\Util\WriteExtrResults.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_strFolderPath">[in_strExtractionResultsFolderPath]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_strLogFileName">[if(in_blnIfAfterHumanValidation,"HumanValidated",Nothing)+"RawExtractionResults.json"]</InArgument>
@@ -143,7 +176,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <Assign sap2010:Annotation.AnnotationText="Run coded wf to get only required data, like Values and their Confidence scores" sap:VirtualizedContainerService.HintSize="434,156" sap2010:WorkflowViewState.IdRef="Assign_7">
+    <Assign sap2010:Annotation.AnnotationText="Run coded wf to get only required data, like Values and their Confidence scores" sap:VirtualizedContainerService.HintSize="468,156" sap2010:WorkflowViewState.IdRef="Assign_7">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[out_strJsonFormattedExtractionResults]</OutArgument>
       </Assign.To>
@@ -156,7 +189,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:LogMessage DisplayName="Log out_strJsonFormattedExtractionResults" sap:VirtualizedContainerService.HintSize="434,173" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;Formatted Extraction Results: &quot;+out_strJsonFormattedExtractionResults]">
+    <ui:LogMessage DisplayName="Log out_strJsonFormattedExtractionResults" sap:VirtualizedContainerService.HintSize="468,173" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;Formatted Extraction Results: &quot;+out_strJsonFormattedExtractionResults]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -164,7 +197,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:LogMessage>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="WriteExtrResults - Invoke Workflow File (WriteExtrResults.xaml)" sap:VirtualizedContainerService.HintSize="434,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Util\WriteExtrResults.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="WriteExtrResults - Invoke Workflow File (WriteExtrResults.xaml)" sap:VirtualizedContainerService.HintSize="468,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Tests\Util\WriteExtrResults.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_strFolderPath">[in_strExtractionResultsFolderPath]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_strLogFileName">[if(in_blnIfAfterHumanValidation,"HumanValidated",Nothing)+"FormattedExtractionResults.json"]</InArgument>

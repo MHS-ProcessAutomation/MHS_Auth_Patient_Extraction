@@ -3,7 +3,8 @@
     <x:Property Name="in_strJsonData" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Flag used for deciding if human validation is required in the classification process." Name="out_AutoExtractionSuccess" Type="OutArgument(x:Boolean)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property Name="out_strAuthNumber" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary that contains document-related values, such as extracted results, and other related data" Name="in_dictDocData" Type="InArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="in_strRegexAuthNumber" Type="InArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -121,72 +122,37 @@
       <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="CheckExtractionResults" sap:VirtualizedContainerService.HintSize="1532,2008" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="CheckExtractionResults" sap:VirtualizedContainerService.HintSize="1516,1997" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="njl:JObject" Name="jsonObjectExtractionResults" />
       <Variable x:TypeArguments="x:Boolean" Name="blnHasLowConfidence" />
       <Variable x:TypeArguments="x:Double" Name="in_dblConfidenceTopThreshold" />
-      <Variable x:TypeArguments="njl:JArray" Name="out_jarrLowConfidenceFields" />
       <Variable x:TypeArguments="njl:JObject" Name="strJsonObj" />
-      <Variable x:TypeArguments="x:String" Name="authorizationNumber" />
-      <Variable x:TypeArguments="x:String" Name="flattenedJsonText" />
+      <Variable x:TypeArguments="x:String" Name="strRegexAuthNumber" />
+      <Variable x:TypeArguments="x:Boolean" Name="boolJarrHasAuthNumber" />
+      <Variable x:TypeArguments="njl:JArray" Name="out_jarrLowConfidenceFields" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:Comment sap:VirtualizedContainerService.HintSize="513,145" sap2010:WorkflowViewState.IdRef="Comment_1" Text="!!! If any of the mandatory fields (Vendor, Facility, or Doc Type) are identified as Out Of Scope, the robot will throw an exception and skip HITL, even if the confidence is low" />
-    <Sequence DisplayName="Regex Authorization Number" sap:VirtualizedContainerService.HintSize="513,384" sap2010:WorkflowViewState.IdRef="Sequence_8">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <ui:DeserializeJson x:TypeArguments="njl:JObject" JsonSample="{x:Null}" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="479,122" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[strJsonObj]" JsonString="[in_strJsonData]" />
-      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="479,170" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
-        <ui:MultipleAssign.AssignOperations>
-          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
-              <ui:AssignOperation.To>
-                <OutArgument x:TypeArguments="x:String">[flattenedJsonText]</OutArgument>
-              </ui:AssignOperation.To>
-              <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String">[String.Join(" ", strJsonObj.Descendants().OfType(Of JValue).Select(Function(v) v.ToString()))]</InArgument>
-              </ui:AssignOperation.Value>
-            </ui:AssignOperation>
-            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
-              <ui:AssignOperation.To>
-                <OutArgument x:TypeArguments="x:String">[authorizationNumber]</OutArgument>
-              </ui:AssignOperation.To>
-              <ui:AssignOperation.Value>
-                <InArgument x:TypeArguments="x:String" xml:space="preserve">[System.Text.RegularExpressions.Regex.Match(
-    flattenedJsonText,
-    "\b(?:Reference#:\s*|Authorization Number:\s*)?(IP\d+|A\d+|PUM\d+)\b",
-    System.Text.RegularExpressions.RegexOptions.IgnoreCase
-).Groups(1).Value]</InArgument>
-              </ui:AssignOperation.Value>
-            </ui:AssignOperation>
-          </scg:List>
-        </ui:MultipleAssign.AssignOperations>
-      </ui:MultipleAssign>
-    </Sequence>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Check Results for Out Of Scope - Invoke Workflow File (Check Results for Out Of Scope.xaml)" sap:VirtualizedContainerService.HintSize="513,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Util\CheckResultsForOutOfScope.xaml">
+    <ui:Comment sap:VirtualizedContainerService.HintSize="536,145" sap2010:WorkflowViewState.IdRef="Comment_1" Text="!!! If any of the mandatory fields (Vendor, Facility, or Doc Type) are identified as Out Of Scope, the robot will throw an exception and skip HITL, even if the confidence is low" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Check Results for Out Of Scope - Invoke Workflow File (Check Results for Out Of Scope.xaml)" sap:VirtualizedContainerService.HintSize="536,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Tests\Util\CheckResultsForOutOfScope.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_strJsonExtractionResults">[in_strJsonData]</InArgument>
         <OutArgument x:TypeArguments="njl:JObject" x:Key="out_jsonObjectExtractionResults">[jsonObjectExtractionResults]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <Sequence DisplayName="Low confidence (HITL)" sap:VirtualizedContainerService.HintSize="513,1174" sap2010:WorkflowViewState.IdRef="Sequence_6">
+    <Sequence DisplayName="Low confidence (HITL)" sap:VirtualizedContainerService.HintSize="536,1547" sap2010:WorkflowViewState.IdRef="Sequence_6">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_22">
+      <Assign sap:VirtualizedContainerService.HintSize="502,114" sap2010:WorkflowViewState.IdRef="Assign_22">
         <Assign.To>
           <OutArgument x:TypeArguments="x:Double">[in_dblConfidenceTopThreshold]</OutArgument>
         </Assign.To>
@@ -194,7 +160,7 @@
           <InArgument x:TypeArguments="x:Double">[CDbl(in_config("ConfidenceTopThreshold"))]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:LogMessage DisplayName="Log in_dblConfidenceTopThreshold" sap:VirtualizedContainerService.HintSize="434,173" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[&quot;ConfidenceTopThreshold: &quot;+in_dblConfidenceTopThreshold.ToString]">
+      <ui:LogMessage DisplayName="Log in_dblConfidenceTopThreshold" sap:VirtualizedContainerService.HintSize="502,173" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[&quot;ConfidenceTopThreshold: &quot;+in_dblConfidenceTopThreshold.ToString]">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -202,12 +168,15 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:LogMessage>
-      <Assign sap:VirtualizedContainerService.HintSize="434,115" sap2010:WorkflowViewState.IdRef="Assign_5">
-        <Assign.To>
-          <OutArgument x:TypeArguments="njl:JArray">[out_jarrLowConfidenceFields]</OutArgument>
-        </Assign.To>
-        <Assign.Value>
-          <InArgument x:TypeArguments="njl:JArray" xml:space="preserve">[New JArray( _
+      <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="502,179" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+        <ui:MultipleAssign.AssignOperations>
+          <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="njl:JArray">[out_jarrLowConfidenceFields]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="njl:JArray" xml:space="preserve">[New JArray( _
     jsonObjectExtractionResults.SelectTokens("$.Data..*"). _
     Where(Function(token) _
         token.Type = JTokenType.Object AndAlso  _
@@ -221,9 +190,48 @@
         ) _
     ) _
 )]</InArgument>
-        </Assign.Value>
-      </Assign>
-      <Assign DisplayName="remove static low confidence fields" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_23">
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+            <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+              <ui:AssignOperation.To>
+                <OutArgument x:TypeArguments="x:Boolean">[boolJarrHasAuthNumber]</OutArgument>
+              </ui:AssignOperation.To>
+              <ui:AssignOperation.Value>
+                <InArgument x:TypeArguments="x:Boolean">[out_jarrLowConfidenceFields.OfType(Of JObject)().Any(Function(obj) obj("FieldName") IsNot Nothing AndAlso obj("FieldName").ToString() = "Authorization Number")]</InArgument>
+              </ui:AssignOperation.Value>
+            </ui:AssignOperation>
+          </scg:List>
+        </ui:MultipleAssign.AssignOperations>
+      </ui:MultipleAssign>
+      <If Condition="[boolJarrHasAuthNumber AndAlso Not String.IsNullOrWhiteSpace(in_strRegexAuthNumber)]" sap:VirtualizedContainerService.HintSize="502,424" sap2010:WorkflowViewState.IdRef="If_1">
+        <If.Then>
+          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="468,165" sap2010:WorkflowViewState.IdRef="Sequence_10">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign DisplayName="Assign extractionSuccessFlag" sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_29">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[in_dictDocData("Authorization Number")]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[in_strRegexAuthNumber]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Sequence_11">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Sequence>
+        </If.Else>
+      </If>
+      <Assign DisplayName="remove static low confidence fields" sap:VirtualizedContainerService.HintSize="502,114" sap2010:WorkflowViewState.IdRef="Assign_23">
         <Assign.To>
           <OutArgument x:TypeArguments="njl:JArray">[out_jarrLowConfidenceFields]</OutArgument>
         </Assign.To>
@@ -231,7 +239,7 @@
           <InArgument x:TypeArguments="njl:JArray">[New JArray(out_jarrLowConfidenceFields.Where(Function(obj) Not {"Authorization Number", "Number of approved days", "Authorization Number Page Number"}.Contains(obj("FieldName").ToString())))]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:LogMessage DisplayName="Log LowConfidenceFields" sap:VirtualizedContainerService.HintSize="434,173" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;LowConfidenceFields: &quot;+vbNewLine+ out_jarrLowConfidenceFields.ToString]">
+      <ui:LogMessage DisplayName="Log LowConfidenceFields" sap:VirtualizedContainerService.HintSize="502,173" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;LowConfidenceFields: &quot;+vbNewLine+ out_jarrLowConfidenceFields.ToString]">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -239,18 +247,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:LogMessage>
-      <Assign DisplayName="Auth number matching" sap:VirtualizedContainerService.HintSize="434,115" sap2010:WorkflowViewState.IdRef="Assign_24">
-        <Assign.To>
-          <OutArgument x:TypeArguments="x:String">[out_strAuthNumber]</OutArgument>
-        </Assign.To>
-        <Assign.Value>
-          <InArgument x:TypeArguments="x:String" xml:space="preserve">[If(out_jarrLowConfidenceFields.OfType(Of JObject).Any(Function(obj) CStr(obj("FieldName")) = "Authorization Number" AndAlso CStr(obj("FieldData")("Value")) = authorizationNumber),
-    CStr(out_jarrLowConfidenceFields.OfType(Of JObject).First(Function(obj) CStr(obj("FieldName")) = "Authorization Number")("FieldData")("Value")),
-    authorizationNumber
-)]</InArgument>
-        </Assign.Value>
-      </Assign>
-      <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_7">
+      <Assign sap:VirtualizedContainerService.HintSize="502,114" sap2010:WorkflowViewState.IdRef="Assign_7">
         <Assign.To>
           <OutArgument x:TypeArguments="x:Boolean">[blnHasLowConfidence]</OutArgument>
         </Assign.To>
@@ -258,7 +255,7 @@
           <InArgument x:TypeArguments="x:Boolean">[out_jarrLowConfidenceFields.Count &gt;0]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,164" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;blnHasLowConfidence: &quot;+blnHasLowConfidence.tostring]">
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="502,164" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;blnHasLowConfidence: &quot;+blnHasLowConfidence.tostring]">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -267,7 +264,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </ui:LogMessage>
     </Sequence>
-    <Assign DisplayName="Assign out_AutoExtractionSuccess" sap:VirtualizedContainerService.HintSize="513,105" sap2010:WorkflowViewState.IdRef="Assign_21">
+    <Assign DisplayName="Assign out_AutoExtractionSuccess" sap:VirtualizedContainerService.HintSize="536,105" sap2010:WorkflowViewState.IdRef="Assign_21">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Boolean">[out_AutoExtractionSuccess]</OutArgument>
       </Assign.To>
