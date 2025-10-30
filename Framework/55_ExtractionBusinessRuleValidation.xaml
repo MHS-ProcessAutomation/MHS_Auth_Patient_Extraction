@@ -122,7 +122,7 @@
       <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="CheckExtractionResults" sap:VirtualizedContainerService.HintSize="1516,1997" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="CheckExtractionResults" sap:VirtualizedContainerService.HintSize="1516,2421" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="njl:JObject" Name="jsonObjectExtractionResults" />
       <Variable x:TypeArguments="x:Boolean" Name="blnHasLowConfidence" />
@@ -131,6 +131,7 @@
       <Variable x:TypeArguments="x:String" Name="strRegexAuthNumber" />
       <Variable x:TypeArguments="x:Boolean" Name="boolJarrHasAuthNumber" />
       <Variable x:TypeArguments="njl:JArray" Name="out_jarrLowConfidenceFields" />
+      <Variable x:TypeArguments="x:String" Name="calculatedEndOfService" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -143,9 +144,10 @@
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_strJsonExtractionResults">[in_strJsonData]</InArgument>
         <OutArgument x:TypeArguments="njl:JObject" x:Key="out_jsonObjectExtractionResults">[jsonObjectExtractionResults]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_extractedValueEndOfService">[calculatedEndOfService]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <Sequence DisplayName="Low confidence (HITL)" sap:VirtualizedContainerService.HintSize="536,1547" sap2010:WorkflowViewState.IdRef="Sequence_6">
+    <Sequence DisplayName="Low confidence (HITL)" sap:VirtualizedContainerService.HintSize="536,1971" sap2010:WorkflowViewState.IdRef="Sequence_6">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -211,7 +213,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Assign DisplayName="Assign extractionSuccessFlag" sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_29">
+            <Assign DisplayName="Assign &quot;Authorization Number&quot;" sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_29">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:String">[in_dictDocData("Authorization Number")]</OutArgument>
               </Assign.To>
@@ -223,6 +225,34 @@
         </If.Then>
         <If.Else>
           <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Sequence_11">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Sequence>
+        </If.Else>
+      </If>
+      <If Condition="[Not String.IsNullOrWhiteSpace(calculatedEndOfService)]" sap:VirtualizedContainerService.HintSize="502,424" sap2010:WorkflowViewState.IdRef="If_2">
+        <If.Then>
+          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="468,165" sap2010:WorkflowViewState.IdRef="Sequence_13">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign DisplayName="Assign &quot;Authorization Number&quot;" sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_30">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[in_dictDocData("End of service")]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[calculatedEndOfService]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Sequence_14">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
